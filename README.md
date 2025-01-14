@@ -1,8 +1,13 @@
 # 🍺 Zytho - Application de Bières Craft
 
+![Beer Cheers](https://media.giphy.com/media/3o7TKUZfJKUKuSWTZe/giphy.gif)
+
 Bienvenue sur mon application de découverte de bières craft ! Cette application web moderne vous permet d'explorer une vaste collection de bières artisanales, de découvrir leurs caractéristiques et de gérer vos favorites.
 
 ## 📋 Table des Matières
+
+![Table Flip](https://media.giphy.com/media/l3vRc1zy8NBqe342I/giphy.gif)
+
 - [🚀 Prérequis](#-prérequis)
 - [⚙️ Installation](#️-installation)
 - [🎮 Lancement du Projet](#-lancement-du-projet)
@@ -13,12 +18,16 @@ Bienvenue sur mon application de découverte de bières craft ! Cette applicatio
 
 ## 🚀 Prérequis
 
+![Mind Blown](https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif)
+
 Avant de commencer, assurez-vous d'avoir installé :
 - Node.js (version 16.0.0 ou supérieure) 📦
 - npm (version 8.0.0 ou supérieure) 🔧
 - Git 🌳
 
 ## ⚙️ Installation
+
+![Installing](https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif)
 
 1. **Clonez le repository** 📥
 ```bash
@@ -45,6 +54,8 @@ VITE_APP_TITLE=Zytho
 
 ## 🎮 Lancement du Projet
 
+![Launch](https://media.giphy.com/media/3o7TKUM3IgJBX2as9O/giphy.gif)
+
 1. **Mode développement** 🔧
 ```bash
 npm run dev
@@ -60,6 +71,8 @@ L'application sera accessible à l'adresse : `http://localhost:4173`
 
 ## 🛠️ Technologies Utilisées
 
+![Tech](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
+
 - **React** ⚛️ - Bibliothèque UI
 - **TypeScript** 📘 - Typage statique
 - **Vite** ⚡ - Build tool
@@ -69,6 +82,8 @@ L'application sera accessible à l'adresse : `http://localhost:4173`
 - **CSS Modules** 🎨 - Styling
 
 ## 📱 Fonctionnalités
+
+![Features](https://media.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif)
 
 - **Catalogue de Bières** 🍺
   - Recherche par nom
@@ -89,6 +104,8 @@ L'application sera accessible à l'adresse : `http://localhost:4173`
 
 ## 🔧 Configuration
 
+![Config](https://media.giphy.com/media/iIqmM5tTjmpOB9mpbn/giphy.gif)
+
 ### Scripts Disponibles
 
 - `npm run dev` - Lance le serveur de développement 🔧
@@ -98,6 +115,8 @@ L'application sera accessible à l'adresse : `http://localhost:4173`
 - `npm run format` - Formate le code avec Prettier ✨
 
 ### Structure des Dossiers 📁
+
+![Folders](https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif)
 
 ```
 src/
@@ -112,6 +131,8 @@ src/
 
 ## 📝 Notes de Développement
 
+![Coding](https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif)
+
 ### Conventions de Code 📚
 
 - Utilisation de TypeScript strict
@@ -120,6 +141,8 @@ src/
 - Tests unitaires pour les composants critiques
 
 ### Bonnes Pratiques 🌟
+
+![Best Practices](https://media.giphy.com/media/l2Sq29cFXoF80ADlK/giphy.gif)
 
 1. **Commits**
    - Messages clairs et descriptifs
@@ -130,12 +153,9 @@ src/
    - Types TypeScript explicites
    - Composants réutilisables
 
-3. **Performance**
-   - Lazy loading des images
-   - Mise en cache des requêtes API
-   - Code splitting automatique
-
 ### Résolution des Problèmes Courants 🔧
+
+![Debugging](https://media.giphy.com/media/yYSSBtDgbbRzq/giphy.gif)
 
 1. **Erreur de build**
 ```bash
@@ -154,6 +174,8 @@ npm run dev -- --force
 
 ## 🤝 Contribution
 
+![Team Work](https://media.giphy.com/media/Pb9MeNn9YWN2s/giphy.gif)
+
 Les contributions sont les bienvenues ! N'hésitez pas à :
 1. Fork le projet
 2. Créer une branche (`git checkout -b feature/AmazingFeature`)
@@ -163,14 +185,20 @@ Les contributions sont les bienvenues ! N'hésitez pas à :
 
 ## 📫 Contact
 
+![Contact](https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif)
+
 Pour toute question ou suggestion, n'hésitez pas à me contacter :
 - Email 📧 : sergei.mlk@hotmail.com
 - LinkedIn 💼 : [Votre Profil](https://github.com/sergeimlk)
 
 ## 📄 Licence
 
+![School](https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif)
+
 Ce projet est Un brief effectué pour la formation, CDA chez Simplon
 
 ---
 
 ⭐️ Si vous aimez ce projet, n'hésitez pas à lui mettre une étoile sur GitHub !
+
+![Thank You](https://media.giphy.com/media/KB8C86UMgLDThpt4WT/giphy.gif)
