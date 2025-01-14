@@ -1,12 +1,12 @@
 # 🍺 Zytho - Application de Bières Craft
 
-<img src="https://media.giphy.com/media/3o7TKUZfJKUKuSWTZe/giphy.gif" width="200" />
+<img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbml2MWV3Z2pqN2xuM2FxYXF2dHpzcTBxMzA1Nm54dGVhMGQyenlzYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QTgzmGzanMnhiwsBql/giphy.gif" width="200" />
 
 Bienvenue sur mon application de découverte de bières craft ! Cette application web moderne vous permet d'explorer une vaste collection de bières artisanales, de découvrir leurs caractéristiques et de gérer vos favorites.
 
 ## 📋 Table des Matières
 
-<img src="https://media.giphy.com/media/l3vRc1zy8NBqe342I/giphy.gif" width="150" />
+<!-- <img src="https://media.giphy.com/media/l3vRc1zy8NBqe342I/giphy.gif" width="150" /> -->
 
 - [🚀 Prérequis](#-prérequis)
 - [⚙️ Installation](#️-installation)
@@ -18,16 +18,15 @@ Bienvenue sur mon application de découverte de bières craft ! Cette applicatio
 
 ## 🚀 Prérequis
 
-<img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" width="150" />
-
 Avant de commencer, assurez-vous d'avoir installé :
 - Node.js (version 16.0.0 ou supérieure) 📦
 - npm (version 8.0.0 ou supérieure) 🔧
 - Git 🌳
+<img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" width="150" />
+
 
 ## ⚙️ Installation
 
-<img src="https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" width="150" />
 
 1. **Clonez le repository** 📥
 ```bash
@@ -51,10 +50,12 @@ Ouvrez le fichier `.env` et ajustez les variables selon vos besoins :
 VITE_API_URL=https://api.punkapi.com/v2
 VITE_APP_TITLE=Zytho
 ```
+<img src="https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" width="150" />
+
 
 ## 🎮 Lancement du Projet
 
-<img src="https://media.giphy.com/media/3o7TKUM3IgJBX2as9O/giphy.gif" width="150" />
+<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fgiphy.com%2Fexplore%2Fcatch-beer&psig=AOvVaw1lUxhfXNT_nqm34YF6Fs7h&ust=1736935673938000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIiEneD79IoDFQAAAAAdAAAAABAE" width="150" />
 
 1. **Mode développement** 🔧
 ```bash
@@ -71,8 +72,6 @@ L'application sera accessible à l'adresse : `http://localhost:4173`
 
 ## 🛠️ Technologies Utilisées
 
-<img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" width="150" />
-
 - **React** ⚛️ - Bibliothèque UI
 - **TypeScript** 📘 - Typage statique
 - **Vite** ⚡ - Build tool
@@ -80,10 +79,9 @@ L'application sera accessible à l'adresse : `http://localhost:4173`
 - **React Query** 📊 - Gestion des états et du cache
 - **Axios** 🔄 - Client HTTP
 - **CSS Modules** 🎨 - Styling
+<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXc5eHdnNzlkZG1sNXdsejRsdnc2b3Z0ZzM2Mmh5emw0YjB5eGF4biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Qn74oPyaKYBpVWdA7t/giphy.gif" width="150" />
 
 ## 📱 Fonctionnalités
-
-<img src="https://media.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif" width="150" />
 
 - **Catalogue de Bières** 🍺
   - Recherche par nom
@@ -102,9 +100,11 @@ L'application sera accessible à l'adresse : `http://localhost:4173`
   - Chargement optimisé
   - Mise en cache des requêtes
 
+<img src="https://media.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif" width="150" />
+
+
 ## 🔧 Configuration
 
-<img src="https://media.giphy.com/media/iIqmM5tTjmpOB9mpbn/giphy.gif" width="150" />
 
 ### Scripts Disponibles
 
@@ -113,10 +113,11 @@ L'application sera accessible à l'adresse : `http://localhost:4173`
 - `npm run preview` - Prévisualise la version de production 👀
 - `npm run lint` - Vérifie le code avec ESLint 🔍
 - `npm run format` - Formate le code avec Prettier ✨
+<img src="https://media.giphy.com/media/iIqmM5tTjmpOB9mpbn/giphy.gif" width="150" />
+
 
 ### Structure des Dossiers 📁
 
-<img src="https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" width="150" />
 
 ```
 src/
@@ -128,6 +129,8 @@ src/
 ├── types/         # Types TypeScript
 └── utils/         # Fonctions utilitaires
 ```
+<img src="https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" width="150" />
+
 
 ## 📝 Notes de Développement
 
@@ -155,7 +158,7 @@ src/
 
 ### Résolution des Problèmes Courants 🔧
 
-<img src="https://media.giphy.com/media/yYSSBtDgbbRzq/giphy.gif" width="150" />
+<!-- <img src="https://media.giphy.com/media/yYSSBtDgbbRzq/giphy.gif" width="150" /> -->
 
 1. **Erreur de build**
 ```bash
@@ -174,7 +177,7 @@ npm run dev -- --force
 
 ## 🤝 Contribution
 
-<img src="https://media.giphy.com/media/Pb9MeNn9YWN2s/giphy.gif" width="150" />
+<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG5mMXE1aTd0Z3RyOGF2ZzA0dXdsZjdvc2U2aTN4OHlvYWN0ZzY4MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pHb82xtBPfqEg/giphy.gif" width="150" />
 
 Les contributions sont les bienvenues ! N'hésitez pas à :
 1. Fork le projet
@@ -185,7 +188,6 @@ Les contributions sont les bienvenues ! N'hésitez pas à :
 
 ## 📫 Contact
 
-<img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" width="150" />
 
 Pour toute question ou suggestion, n'hésitez pas à me contacter :
 - Email 📧 : sergei.mlk@hotmail.com
@@ -193,12 +195,14 @@ Pour toute question ou suggestion, n'hésitez pas à me contacter :
 
 ## 📄 Licence
 
-<img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" width="150" />
-
 Ce projet est Un brief effectué pour la formation, CDA chez Simplon
+<img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" width="150" />
+
 
 ---
 
 ⭐️ Si vous aimez ce projet, n'hésitez pas à lui mettre une étoile sur GitHub !
 
 <img src="https://media.giphy.com/media/KB8C86UMgLDThpt4WT/giphy.gif" width="150" />
+<img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" width="150" />
+
