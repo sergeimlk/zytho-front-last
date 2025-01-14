@@ -55,7 +55,7 @@ VITE_APP_TITLE=Zytho
 
 ## 🎮 Lancement du Projet
 
-<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fgiphy.com%2Fexplore%2Fcatch-beer&psig=AOvVaw1lUxhfXNT_nqm34YF6Fs7h&ust=1736935673938000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIiEneD79IoDFQAAAAAdAAAAABAE" width="150" />
+<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDlpb3g5MXkyOHR5YjYxN3c0MThib3J6Z2JrMTV3b3hkZnVqcTF5aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Y3jwwe1xIpkDZXQXn3/giphy.gif" width="150" />
 
 1. **Mode développement** 🔧
 ```bash
@@ -196,13 +196,14 @@ Pour toute question ou suggestion, n'hésitez pas à me contacter :
 ## 📄 Licence
 
 Ce projet est Un brief effectué pour la formation, CDA chez Simplon
-<img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" width="150" />
 
 
 ---
 
 ⭐️ Si vous aimez ce projet, n'hésitez pas à lui mettre une étoile sur GitHub !
 
+<img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" width="150" />
 <img src="https://media.giphy.com/media/KB8C86UMgLDThpt4WT/giphy.gif" width="150" />
 <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" width="150" />
+
 
