@@ -446,15 +446,16 @@
 .website-button {
   display: inline-block;
   padding: 12px 24px;
-  background-color: #4a90e2;
+  background-color: var(--primary);
   color: white;
   text-decoration: none;
   border-radius: 6px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
 .website-button:hover {
-  background-color: #357abd;
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {

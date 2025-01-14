@@ -2,41 +2,125 @@ import React from 'react';
 import '../styles/Infos.css';
 
 const Infos: React.FC = () => {
+  const openDocumentation = (url: string) => {
+    window.open(url, '_blank');
+  };
+
   const techStack = [
     {
       category: "Frontend",
       items: [
-        { name: "React", icon: "⚛️", description: "J'ai choisi React comme bibliothèque principale pour l'interface utilisateur" },
-        { name: "TypeScript", icon: "📘", description: "J'utilise TypeScript pour un code plus robuste et typé" },
-        { name: "React Router", icon: "🛣️", description: "J'ai implémenté le routage avec React Router" },
-        { name: "CSS Modules", icon: "🎨", description: "J'ai opté pour des styles modulaires pour une meilleure maintenabilité" }
+        { 
+          name: "React", 
+          icon: "⚛️", 
+          description: "J'ai choisi React comme bibliothèque principale pour l'interface utilisateur",
+          docUrl: "https://react.dev/"
+        },
+        { 
+          name: "TypeScript", 
+          icon: "📘", 
+          description: "J'utilise TypeScript pour un code plus robuste et typé",
+          docUrl: "https://www.typescriptlang.org/docs/"
+        },
+        { 
+          name: "React Router", 
+          icon: "🛣️", 
+          description: "J'ai implémenté le routage avec React Router",
+          docUrl: "https://reactrouter.com/"
+        },
+        { 
+          name: "CSS Modules", 
+          icon: "🎨", 
+          description: "J'ai opté pour des styles modulaires pour une meilleure maintenabilité",
+          docUrl: "https://github.com/css-modules/css-modules"
+        }
       ]
     },
     {
       category: "API & Intégration",
       items: [
-        { name: "Punk API", icon: "🍺", description: "J'utilise cette API publique pour les données de bières" },
-        { name: "Axios", icon: "🔄", description: "J'ai choisi Axios pour gérer mes requêtes HTTP" },
-        { name: "React Query", icon: "📊", description: "Je gère le cache et les états avec React Query" },
-        { name: "TypeScript Types", icon: "📋", description: "J'ai créé des types personnalisés pour les données" }
+        { 
+          name: "API Personnelle", 
+          icon: "🍺", 
+          description: "J'utilise mon API personnelle hébergée sur Docker pour les données de bières",
+          docUrl: import.meta.env.VITE_API_DOCS_URL
+        },
+        { 
+          name: "Axios", 
+          icon: "🔄", 
+          description: "J'ai choisi Axios pour gérer mes requêtes HTTP",
+          docUrl: "https://axios-http.com/docs/intro"
+        },
+        { 
+          name: "React Query", 
+          icon: "📊", 
+          description: "Je gère le cache et les états avec React Query",
+          docUrl: "https://tanstack.com/query/latest"
+        },
+        { 
+          name: "TypeScript Types", 
+          icon: "📋", 
+          description: "J'ai créé des types personnalisés pour les données",
+          docUrl: "https://www.typescriptlang.org/docs/handbook/2/types-from-types.html"
+        }
       ]
     },
     {
       category: "Outils de Développement",
       items: [
-        { name: "Vite", icon: "⚡", description: "J'ai configuré Vite pour un développement rapide" },
-        { name: "ESLint", icon: "🔍", description: "J'utilise ESLint pour maintenir la qualité du code" },
-        { name: "Git", icon: "📚", description: "Je gère les versions avec Git" },
-        { name: "npm", icon: "📦", description: "Je gère mes dépendances avec npm" }
+        { 
+          name: "Vite", 
+          icon: "⚡", 
+          description: "J'ai configuré Vite pour un développement rapide",
+          docUrl: "https://vitejs.dev/guide/"
+        },
+        { 
+          name: "ESLint", 
+          icon: "🔍", 
+          description: "J'utilise ESLint pour maintenir la qualité du code",
+          docUrl: "https://eslint.org/docs/latest/"
+        },
+        { 
+          name: "Git", 
+          icon: "📚", 
+          description: "Je gère les versions avec Git",
+          docUrl: "https://git-scm.com/doc"
+        },
+        { 
+          name: "npm", 
+          icon: "📦", 
+          description: "Je gère mes dépendances avec npm",
+          docUrl: "https://docs.npmjs.com/"
+        }
       ]
     },
     {
       category: "Design & UI",
       items: [
-        { name: "Responsive Design", icon: "📱", description: "J'ai créé une interface adaptative" },
-        { name: "Dark Mode", icon: "🌙", description: "J'ai implémenté un thème sombre par défaut" },
-        { name: "Custom Components", icon: "🎯", description: "J'ai développé des composants sur mesure" },
-        { name: "Animations", icon: "✨", description: "J'ai ajouté des animations fluides" }
+        { 
+          name: "Responsive Design", 
+          icon: "📱", 
+          description: "J'ai créé une interface adaptative",
+          docUrl: "https://developer.mozilla.org/fr/docs/Learn/CSS/CSS_layout/Responsive_Design"
+        },
+        { 
+          name: "Dark Mode", 
+          icon: "🌙", 
+          description: "J'ai implémenté un thème sombre par défaut",
+          docUrl: "https://developer.mozilla.org/fr/docs/Web/CSS/@media/prefers-color-scheme"
+        },
+        { 
+          name: "Custom Components", 
+          icon: "🎯", 
+          description: "J'ai développé des composants sur mesure",
+          docUrl: "https://react.dev/learn/your-first-component"
+        },
+        { 
+          name: "Animations", 
+          icon: "✨", 
+          description: "J'ai ajouté des animations fluides",
+          docUrl: "https://developer.mozilla.org/fr/docs/Web/CSS/CSS_animations"
+        }
       ]
     }
   ];
@@ -73,14 +157,14 @@ const Infos: React.FC = () => {
   ];
 
   const apiInfo = {
-    title: "Mon Intégration avec Punk API",
-    description: "J'utilise la Punk API, une API RESTful publique qui me fournit des données détaillées sur les bières craft. Voici comment je l'ai intégrée :",
+    title: "Mon Intégration avec mon API Personnelle",
+    description: "J'utilise mon API personnelle hébergée sur Docker pour les données de bières. Voici comment je l'ai intégrée :",
     features: [
       {
         title: "Mes Requêtes API",
-        description: "J'utilise Axios pour effectuer mes requêtes HTTP vers l'API. J'ai implémenté la récupération de la liste des bières, la recherche par nom, et le filtrage par caractéristiques.",
+        description: "J'utilise Axios pour effectuer mes requêtes HTTP vers mon API. J'ai implémenté la récupération de la liste des bières, la recherche par nom, et le filtrage par caractéristiques.",
         code: `const fetchBeers = async (page: number) => {
-  const response = await axios.get(\`https://api.punkapi.com/v2/beers?page=\${page}&per_page=20\`);
+  const response = await axios.get(\`${import.meta.env.VITE_API_URL}/beers?page=\${page}&limit=20}\`);
   return response.data;
 };`
       },
@@ -126,7 +210,12 @@ const Infos: React.FC = () => {
                 <h3>{stack.category}</h3>
                 <div className="tech-items">
                   {stack.items.map((item, itemIndex) => (
-                    <div key={itemIndex} className="tech-item">
+                    <div 
+                      key={itemIndex} 
+                      className="tech-item"
+                      onClick={() => openDocumentation(item.docUrl)}
+                      style={{ cursor: 'pointer' }}
+                    >
                       <span className="tech-icon">{item.icon}</span>
                       <h4>{item.name}</h4>
                       <p>{item.description}</p>
