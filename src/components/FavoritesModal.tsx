@@ -1,27 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/FavoritesModal.css';
-
-interface Beer {
-  id: number;
-  name: string;
-  brewery: string;
-  image: string;
-}
+import { useFavorites } from '../context/FavoritesContext';
+import { FaTimes, FaTrash } from 'react-icons/fa';
 
 interface FavoritesModalProps {
   isOpen: boolean;
   onClose: () => void;
-  favorites: Beer[];
-  onRemoveFavorite: (id: number) => void;
 }
 
-const FavoritesModal: React.FC<FavoritesModalProps> = ({
-  isOpen,
-  onClose,
-  favorites,
-  onRemoveFavorite
-}) => {
-  React.useEffect(() => {
+const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose }) => {
+  const { favorites, removeFavorite } = useFavorites();
+
+  useEffect(() => {
     if (isOpen) {
       document.body.classList.add('modal-open');
     } else {
@@ -36,34 +26,38 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>Mes Bières Favorites</h2>
-          <button className="close-button" onClick={onClose}>&times;</button>
-        </div>
+    <div className="favorites-modal-overlay" onClick={onClose}>
+      <div className="favorites-modal-content" onClick={e => e.stopPropagation()}>
+        <button className="close-modal-button" onClick={onClose}>
+          <FaTimes />
+        </button>
         
-        <div className="favorites-list">
-          {favorites.length === 0 ? (
-            <p className="empty-message">Aucune bière favorite pour le moment</p>
-          ) : (
-            favorites.map(beer => (
-              <div key={beer.id} className="favorite-item">
-                <img src={beer.image} alt={beer.name} className="beer-image" />
-                <div className="beer-info">
+        <h2>Mes Bières Favorites</h2>
+        
+        {favorites.length === 0 ? (
+          <p className="no-favorites">Aucune bière favorite pour le moment</p>
+        ) : (
+          <div className="favorites-list">
+            {favorites.map(beer => (
+              <div key={beer.id_beer} className="favorite-item">
+                <div className="favorite-info">
                   <h3>{beer.name}</h3>
-                  <p>{beer.brewery}</p>
+                  <p>{beer.description}</p>
+                  <p className="beer-details">
+                    <span>ABV: {beer.abv}%</span>
+                    <span>IBU: {beer.ibu}</span>
+                  </p>
                 </div>
                 <button 
-                  className="remove-button"
-                  onClick={() => onRemoveFavorite(beer.id)}
+                  className="remove-favorite-button"
+                  onClick={() => removeFavorite(beer.id_beer)}
                 >
-                  <i className="fas fa-heart-broken"></i>
+                  <FaTrash />
                 </button>
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,18 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Breweries.css';
 import { Link } from 'react-router-dom';
-import { FaClock, FaHeart } from 'react-icons/fa';
+import { FaClock, FaHeart, FaTimes } from 'react-icons/fa';
 import SearchBar from '../components/SearchBar';
+import { apiService } from '../services/api.service';
+import { Brewery as ApiBrewery } from '../types/api.types';
+import { Beer } from '../types/api.types';
 
-interface Brewery {
-  id: number;
-  name: string;
+interface Brewery extends ApiBrewery {
   location: string;
   description: string;
   image: string;
   website: string;
   specialties: string[];
 }
+
+interface BreweryModalProps {
+  brewery: Brewery;
+  onClose: () => void;
+  beers: Beer[];
+}
+
+const BreweryModal: React.FC<BreweryModalProps> = ({ brewery, onClose, beers }) => {
+  return (
+    <div className="brewery-modal-overlay" onClick={onClose}>
+      <div className="brewery-modal-content" onClick={e => e.stopPropagation()}>
+        <button className="close-button" onClick={onClose}>
+          <FaTimes />
+        </button>
+        <div className="brewery-modal-header">
+          <img src={brewery.image} alt={brewery.name} className="brewery-modal-image" />
+          <div className="brewery-modal-title">
+            <h2>{brewery.name}</h2>
+            <p className="location">{brewery.location}</p>
+          </div>
+        </div>
+        <div className="brewery-modal-body">
+          <div className="brewery-modal-description">
+            <h3>À propos</h3>
+            <p>{brewery.description}</p>
+          </div>
+          <div className="brewery-modal-beers">
+            <h3>Nos Bières</h3>
+            <div className="beers-grid">
+              {beers.map(beer => (
+                <div key={beer.id_beer} className="beer-card-mini">
+                  <h4>{beer.name}</h4>
+                  <p className="beer-description">{beer.description}</p>
+                  <p className="beer-details">
+                    <span className="abv">{beer.abv}% ABV</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="brewery-modal-footer">
+            <a href={brewery.website} target="_blank" rel="noopener noreferrer" className="website-button">
+              Visiter le site web
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const breweryFeatures = [
   {
@@ -41,38 +92,102 @@ const breweryFeatures = [
   }
 ];
 
-const breweries: Brewery[] = [
-  {
-    id: 1,
-    name: "Brasserie Belharra",
-    location: "Bayonne, Pays Basque",
-    description: "Située au cœur du Pays Basque, la Brasserie Belharra produit des bières artisanales de caractère inspirées par l'esprit basque.",
+// Images et descriptions par défaut pour les nouvelles brasseries
+const defaultBreweryData = {
+  description: "Une brasserie artisanale authentique produisant des bières de caractère.",
+  image: "https://www.mesbieres.fr/wp-content/uploads/2022/01/Belharra-cover-e1641227489358.jpg",
+  website: "#",
+  specialties: ["Blonde", "Ambrée", "IPA"]
+};
+
+// Données spécifiques pour certaines brasseries
+const brewerySpecificData: { [key: string]: Partial<Brewery> } = {
+  "Brasserie des Montagnes": {
+    description: "Située au cœur des montagnes françaises, cette brasserie produit des bières d'exception inspirées par l'air pur des sommets.",
     image: "https://www.mesbieres.fr/wp-content/uploads/2022/01/Belharra-cover-e1641227489358.jpg",
-    website: "https://belharra.fr",
-    specialties: ["Blonde Basque", "IPA Euskal", "Ambrée des Pyrénées"]
+    specialties: ["Blonde des Montagnes", "Triple d'Altitude", "Ambrée des Cimes"]
   },
-  {
-    id: 2,
-    name: "Bob's Beer",
-    location: "Bidart, Pays Basque",
-    description: "Bob's Beer est une micro-brasserie artisanale créée par des passionnés de surf et de bière.",
-    image: "https://cdt64.media.tourinsoft.eu/upload/2E2A5848-copie.jpg?width=1800",
-    website: "https://bobsbeer.fr",
-    specialties: ["Session IPA", "Pacific Pale Ale", "Summer Blonde"]
+  "Bière de la Vallée": {
+    description: "Une brasserie traditionnelle belge perpétuant le savoir-faire ancestral des moines brasseurs.",
+    image: "https://cdt64.media.tourinsoft.eu/upload/2E2A5848-copie.jpg",
+    specialties: ["Triple d'Abbaye", "Cuvée des Moines", "Blonde Dorée"]
   },
-  {
-    id: 3,
-    name: "Brasserie Eguzki",
-    location: "Pays Basque",
-    description: "Une brasserie authentique qui incarne l'esprit du Pays Basque dans chacune de ses créations.",
+  "La Micro du Soleil": {
+    description: "Brasserie artisanale canadienne spécialisée dans les bières houblonnées et rafraîchissantes.",
     image: "https://brasseriedupaysbasque.com/wp-content/uploads/2021/11/carton-eguzki-COMPLET-768x681.jpg",
-    website: "https://eguzki.fr",
-    specialties: ["Blonde Traditionnelle", "Ambrée du Pays", "Blanche Légère"]
+    specialties: ["IPA du Soleil", "Pale Ale Tropicale", "Session IPA"]
   }
-];
+};
 
 const Breweries = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [breweries, setBreweries] = useState<Brewery[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedBrewery, setSelectedBrewery] = useState<Brewery | null>(null);
+  const [breweryBeers, setBreweryBeers] = useState<Beer[]>([]);
+
+  useEffect(() => {
+    const fetchBreweries = async () => {
+      try {
+        const apiBreweries = await apiService.getAllBreweries();
+        
+        // Filtrer les brasseries avec des données valides (non "string")
+        const validBreweries = apiBreweries.filter(brewery => 
+          brewery.name !== "string" && brewery.country !== "string"
+        );
+        
+        const enhancedBreweries: Brewery[] = validBreweries.map(brewery => {
+          // Vérifier si nous avons des données spécifiques pour cette brasserie
+          const specificData = brewerySpecificData[brewery.name] || {};
+          
+          return {
+            ...brewery,
+            location: `${brewery.country}`,
+            description: specificData.description || defaultBreweryData.description,
+            image: specificData.image || defaultBreweryData.image,
+            website: specificData.website || defaultBreweryData.website,
+            specialties: specificData.specialties || defaultBreweryData.specialties
+          };
+        });
+
+        setBreweries(enhancedBreweries);
+        setLoading(false);
+      } catch (err) {
+        setError('Erreur lors du chargement des brasseries');
+        setLoading(false);
+        console.error('Erreur:', err);
+      }
+    };
+
+    fetchBreweries();
+  }, []);
+
+  const handleBreweryClick = async (brewery: Brewery) => {
+    try {
+      const beers = await apiService.getAllBeers();
+      // Filtrer les bières valides pour cette brasserie
+      const breweryBeers = beers
+        .filter(beer => beer.brewery_id === brewery.id_brewery)
+        .map(beer => ({
+          ...beer,
+          name: beer.name === "string" ? "Bière Artisanale" : beer.name,
+          description: beer.description === "string" ? 
+            "Une bière artisanale unique avec des saveurs authentiques." : 
+            beer.description
+        }));
+
+      setBreweryBeers(breweryBeers);
+      setSelectedBrewery(brewery);
+    } catch (err) {
+      console.error('Erreur lors du chargement des bières:', err);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedBrewery(null);
+    setBreweryBeers([]);
+  };
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -87,11 +202,22 @@ const Breweries = () => {
     )
   );
 
+  if (loading) return <div className="loading">Chargement...</div>;
+  if (error) return <div className="error">{error}</div>;
+
   return (
     <div className="breweries-container">
       <h1 className="page-title">🏭 Nos Brasseries Locales</h1>
+      
+      {selectedBrewery && (
+        <BreweryModal
+          brewery={selectedBrewery}
+          onClose={handleCloseModal}
+          beers={breweryBeers}
+        />
+      )}
+
       <section className="features-section">
-        {/* <h1>Découvrez nos brasseries</h1> */}
         <div className="brewery-cards">
           {breweryFeatures.map((card) => (
             <div key={card.id} className="feature-card">
@@ -126,7 +252,11 @@ const Breweries = () => {
         </div>
         <div className="breweries-grid">
           {filteredBreweries.map(brewery => (
-            <div key={brewery.id} className="brewery-detail-card">
+            <div 
+              key={brewery.id_brewery} 
+              className="brewery-detail-card"
+              onClick={() => handleBreweryClick(brewery)}
+            >
               <div className="brewery-header">
                 <h2>{brewery.name}</h2>
                 <p className="location">{brewery.location}</p>
@@ -144,7 +274,13 @@ const Breweries = () => {
                     ))}
                   </div>
                 </div>
-                <a href={brewery.website} target="_blank" rel="noopener noreferrer" className="website-link">
+                <a 
+                  href={brewery.website} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="website-link"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   Visiter le site web →
                 </a>
               </div>

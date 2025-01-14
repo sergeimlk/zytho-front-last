@@ -4,6 +4,7 @@ import SearchBar from '../components/SearchBar';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { apiService } from '../services/api.service';
 import { Beer as ApiBeer, Brewery } from '../types/api.types';
+import { useFavorites } from '../context/FavoritesContext';
 
 interface BeerDisplay extends ApiBeer {
   image: string;
@@ -11,12 +12,12 @@ interface BeerDisplay extends ApiBeer {
 }
 
 const Beers = () => {
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 20]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedBreweries, setSelectedBreweries] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBeer, setSelectedBeer] = useState<BeerDisplay | null>(null);
-  const [favorites, setFavorites] = useState<number[]>([]);
   const [beers, setBeers] = useState<BeerDisplay[]>([]);
   const [breweries, setBreweries] = useState<Brewery[]>([]);
   const [loading, setLoading] = useState(true);
@@ -54,11 +55,13 @@ const Beers = () => {
     setSearchQuery(query.trim());
   };
 
-  const toggleFavorite = (e: React.MouseEvent, beerId: number) => {
-    e.stopPropagation();
-    setFavorites(prev =>
-      prev.includes(beerId) ? prev.filter(id => id !== beerId) : [...prev, beerId]
-    );
+  const handleFavoriteClick = (beer: BeerDisplay, event: React.MouseEvent) => {
+    event.stopPropagation();
+    if (isFavorite(beer.id)) {
+      removeFavorite(beer.id);
+    } else {
+      addFavorite(beer);
+    }
   };
 
   const openBeerDetails = (beer: BeerDisplay) => {
@@ -192,10 +195,10 @@ const Beers = () => {
                     <p className="price">{beer.price!.toFixed(2)} €</p>
                   </div>
                   <button 
-                    className="favorite-button"
-                    onClick={(e) => toggleFavorite(e, beer.id)}
+                    className={`favorite-button ${isFavorite(beer.id) ? 'active' : ''}`}
+                    onClick={(e) => handleFavoriteClick(beer, e)}
                   >
-                    {favorites.includes(beer.id) ? 
+                    {isFavorite(beer.id) ? 
                       <FaHeart className="heart-icon filled" /> : 
                       <FaRegHeart className="heart-icon" />
                     }
@@ -221,14 +224,14 @@ const Beers = () => {
                 <p className="modal-volume">{selectedBeer.volume}</p>
                 <p className="modal-price">{selectedBeer.price!.toFixed(2)} €</p>
                 <button 
-                  className="modal-favorite-button"
-                  onClick={(e) => toggleFavorite(e, selectedBeer.id)}
+                  className={`modal-favorite-button ${isFavorite(selectedBeer.id) ? 'active' : ''}`}
+                  onClick={(e) => handleFavoriteClick(selectedBeer, e)}
                 >
-                  {favorites.includes(selectedBeer.id) ? 
+                  {isFavorite(selectedBeer.id) ? 
                     <FaHeart className="heart-icon filled" /> : 
                     <FaRegHeart className="heart-icon" />
                   }
-                  {favorites.includes(selectedBeer.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                  {isFavorite(selectedBeer.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
                 </button>
               </div>
             </div>

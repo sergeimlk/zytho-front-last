@@ -147,22 +147,38 @@
   color: #ff2424;
 }
 
+.favorites-link {
+  position: relative;
+  padding-right: 25px;
+}
+
 .favorites-count {
   position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #ff4b4b;
+  top: -8px;
+  right: -8px;
+  background-color: #e74c3c;
   color: white;
   border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 12px;
-  min-width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  font-weight: bold;
+  animation: pop 0.3s ease-out;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .auth-buttons {

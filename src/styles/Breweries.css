@@ -179,10 +179,13 @@
   border-radius: 15px;
   overflow: hidden;
   transition: transform 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
 .brewery-detail-card:hover {
   transform: translateY(-5px);
+  transform: translateY(-4px);
 }
 
 .brewery-header {
@@ -310,6 +313,148 @@
 
 .pack-image img:hover {
   transform: scale(1.02);
+}
+
+/* Modal Styles */
+.brewery-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.brewery-modal-content {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.brewery-modal-header {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.brewery-modal-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.brewery-modal-title h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #333;
+}
+
+.brewery-modal-title .location {
+  color: #666;
+  margin-top: 8px;
+}
+
+.brewery-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.brewery-modal-description h3,
+.brewery-modal-beers h3 {
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.brewery-modal-description p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.beers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.beer-card-mini {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 16px;
+  transition: transform 0.2s;
+}
+
+.beer-card-mini:hover {
+  transform: translateY(-2px);
+}
+
+.beer-card-mini h4 {
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.beer-description {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.beer-details {
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  font-size: 14px;
+}
+
+.brewery-modal-footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.website-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #4a90e2;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.website-button:hover {
+  background-color: #357abd;
 }
 
 @media (max-width: 768px) {

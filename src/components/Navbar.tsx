@@ -1,17 +1,13 @@
-import { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import '../styles/Navbar.css';
 import FavoritesModal from './FavoritesModal';
-import { tempFavorites } from '../pages/Favorites';
+import { useFavorites } from '../context/FavoritesContext';
 
 const Navbar = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [favorites, setFavorites] = useState(tempFavorites);
-
-  const handleRemoveFavorite = (id: number) => {
-    setFavorites(favorites.filter(beer => beer.id !== id));
-  };
+  const { favoritesCount } = useFavorites();
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
     <nav className="navbar">
@@ -43,7 +39,9 @@ const Navbar = () => {
             onClick={() => setIsModalOpen(true)}
           >
             <FaHeart className="heart-icon" />
-            <span className="favorites-count">{favorites.length}</span>
+            {favoritesCount > 0 && (
+              <span className="favorites-count">{favoritesCount}</span>
+            )}
           </button>
           
           <div className="auth-buttons">
@@ -56,8 +54,6 @@ const Navbar = () => {
       <FavoritesModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        favorites={favorites}
-        onRemoveFavorite={handleRemoveFavorite}
       />
     </nav>
   );
