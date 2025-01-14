@@ -28,6 +28,7 @@
   margin: -1rem 0 1rem 0;
   background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -211,6 +212,184 @@ section h2 {
   line-height: 1.5;
 }
 
+.api-integration {
+  margin: 4rem 0;
+  padding: 2rem;
+  background: rgba(30, 30, 30, 0.5);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.api-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+}
+
+.api-features {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.api-feature {
+  padding: 1.5rem;
+  background: rgba(40, 40, 40, 0.5);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.api-feature h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.api-feature p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.code-block {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.code-block code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  color: #e6e6e6;
+  line-height: 1.4;
+  white-space: pre;
+}
+
+.development {
+  margin: 4rem 0;
+  padding: 2rem;
+  position: relative;
+}
+
+.development h2 {
+  text-align: center;
+  margin-bottom: 4rem;
+  color: var(--primary);
+  font-size: 2rem;
+}
+
+.development-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: relative;
+  padding: 0 2rem;
+}
+
+.development-steps::before {
+  content: '';
+  position: absolute;
+  left: 3rem;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, 
+    var(--primary) 0%, 
+    var(--secondary) 50%, 
+    var(--accent) 100%
+  );
+  border-radius: 4px;
+}
+
+.step {
+  position: relative;
+  padding-left: 7rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.step::before {
+  content: '';
+  position: absolute;
+  left: 2.5rem;
+  top: 1.5rem;
+  width: 2rem;
+  height: 2px;
+  background: var(--secondary);
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.step-icon {
+  position: absolute;
+  left: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  background: var(--background);
+  border: 3px solid var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.3);
+  transform: translateX(-50%);
+}
+
+.step:nth-child(2) .step-icon {
+  border-color: var(--secondary);
+  box-shadow: 0 0 20px rgba(var(--secondary-rgb), 0.3);
+}
+
+.step:nth-child(3) .step-icon {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.3);
+}
+
+.step h3 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin: 0;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.step ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step li {
+  position: relative;
+  padding: 0.8rem 0 0.8rem 2rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.step li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--secondary);
+}
+
+.step:hover .step-icon {
+  transform: translateX(-50%) scale(1.1);
+  transition: transform 0.3s ease;
+}
+
 @media (max-width: 768px) {
   .info-container {
     padding: 1rem;
@@ -247,5 +426,46 @@ section h2 {
   .development-phase,
   .feature-card {
     padding: 1.5rem;
+  }
+
+  .api-features {
+    grid-template-columns: 1fr;
+  }
+  
+  .api-feature {
+    padding: 1rem;
+  }
+  
+  .code-block {
+    font-size: 0.8rem;
+  }
+
+  .development-steps::before {
+    left: 1.5rem;
+  }
+  
+  .step {
+    padding-left: 4rem;
+  }
+  
+  .step::before {
+    left: 1rem;
+    width: 1.5rem;
+  }
+  
+  .step-icon {
+    left: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .step h3 {
+    font-size: 1.3rem;
+  }
+  
+  .step li {
+    font-size: 1rem;
+    padding-left: 1.5rem;
   }
 }

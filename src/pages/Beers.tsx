@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import '../styles/Beers.css';
 import SearchBar from '../components/SearchBar';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
@@ -8,7 +8,9 @@ import { useFavorites } from '../context/FavoritesContext';
 import FavoriteToast from '../components/FavoriteToast';
 
 interface BeerDisplay extends ApiBeer {
-  category_id: ReactNode;
+  id: number;
+  volume?: ReactNode;
+  category_id?: string;
   image: string;
   price?: number;
 }
@@ -40,8 +42,9 @@ const Beers = () => {
         // Ajouter des images par défaut et un prix fictif pour les bières
         const beersWithDisplay = beersData.map(beer => ({
           ...beer,
+          id: beer.id_beer,
           image: "https://www.belharra.eus/files/BIERES/baleharra-33-blonde.png",
-          price: parseFloat(beer.abv) * 0.8 // Prix fictif basé sur le degré d'alcool
+          price: beer.abv ? beer.abv * 0.8 : 5.0 // Default price of 5.0 if abv is not available
         }));
 
         setBeers(beersWithDisplay);
@@ -63,10 +66,10 @@ const Beers = () => {
 
   const handleFavoriteClick = (beer: BeerDisplay, event: React.MouseEvent) => {
     event.stopPropagation();
-    const isFav = isFavorite(beer.id);
+    const isFav = isFavorite(beer.id_beer);
     
     if (isFav) {
-      removeFavorite(beer.id);
+      removeFavorite(beer.id_beer);
       setToast({
         message: `${beer.name} retiré des favoris`,
         visible: true
@@ -91,7 +94,10 @@ const Beers = () => {
   if (loading) return <div className="loading">Chargement...</div>;
   if (error) return <div className="error">{error}</div>;
 
-  const types = [...new Set(beers.map(beer => beer.category_id.toString()))];
+  const types = [...new Set(beers
+    .map(beer => beer.category_id)
+    .filter((category): category is string => category !== undefined))];
+
   const breweryNames = [...new Set(breweries.map(brewery => brewery.name))];
 
   const filteredBeers = beers.filter(beer => {
@@ -102,7 +108,7 @@ const Beers = () => {
       beerName.includes(term) || brewery.includes(term)
     );
 
-    const matchesType = selectedTypes.length === 0 || selectedTypes.includes(beer.category_id.toString());
+    const matchesType = selectedTypes.length === 0 || selectedTypes.includes(beer.category_id || '');
     const matchesBrewery = selectedBreweries.length === 0 || 
       (breweries.find(b => b.id_brewery === beer.brewery_id)?.name &&
       selectedBreweries.includes(breweries.find(b => b.id_brewery === beer.brewery_id)!.name));
@@ -209,9 +215,9 @@ const Beers = () => {
                   <div className="beer-image">
                     <img src={beer.image} alt={beer.name} />
                     <button
-                      className={`favorite-button ${isFavorite(beer.id) ? 'active' : ''}`}
+                      className={`favorite-button ${isFavorite(beer.id_beer) ? 'active' : ''}`}
                       onClick={(e) => handleFavoriteClick(beer, e)}
-                      aria-label={isFavorite(beer.id) ? "Retirer des favoris" : "Ajouter aux favoris"}
+                      aria-label={isFavorite(beer.id_beer) ? "Retirer des favoris" : "Ajouter aux favoris"}
                     >
                       <FaHeart className="heart-icon" />
                     </button>
@@ -244,14 +250,14 @@ const Beers = () => {
                 <p className="modal-volume">{selectedBeer.volume}</p>
                 <p className="modal-price">{selectedBeer.price!.toFixed(2)} €</p>
                 <button 
-                  className={`modal-favorite-button ${isFavorite(selectedBeer.id) ? 'active' : ''}`}
+                  className={`modal-favorite-button ${isFavorite(selectedBeer.id_beer) ? 'active' : ''}`}
                   onClick={(e) => handleFavoriteClick(selectedBeer, e)}
                 >
-                  {isFavorite(selectedBeer.id) ? 
+                  {isFavorite(selectedBeer.id_beer) ? 
                     <FaHeart className="heart-icon filled" /> : 
                     <FaRegHeart className="heart-icon" />
                   }
-                  {isFavorite(selectedBeer.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                  {isFavorite(selectedBeer.id_beer) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
                 </button>
               </div>
             </div>

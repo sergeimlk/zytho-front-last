@@ -27,12 +27,12 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-right">
-          <div className="search-bar">
+          {/* <div className="search-bar">
             <input type="text" placeholder="Rechercher..." />
             <button type="button" className="search-btn">
               <i className="fas fa-search"></i>
             </button>
-          </div>
+          </div> */}
           
           <button 
             className="favorites-button"

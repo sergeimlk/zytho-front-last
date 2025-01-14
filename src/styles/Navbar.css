@@ -37,11 +37,12 @@
 .logo-img {
   height: 110px;
   width: auto;
-  margin-right: 0.75rem;
+  margin-right: -10rem;
   border-radius: 15%;
   transition: transform 0.2s ease;
   position: relative;
   bottom: -45px;
+  right: -45px;
 }
 
 .logo-text {

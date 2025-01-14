@@ -1,5 +1,6 @@
+
 export interface Beer {
-    abv: ReactNode;
+    abv: number;
     id_beer: number;
     name: string;
     description: string;
