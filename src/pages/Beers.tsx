@@ -5,8 +5,10 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { apiService } from '../services/api.service';
 import { Beer as ApiBeer, Brewery } from '../types/api.types';
 import { useFavorites } from '../context/FavoritesContext';
+import FavoriteToast from '../components/FavoriteToast';
 
 interface BeerDisplay extends ApiBeer {
+  category_id: ReactNode;
   image: string;
   price?: number;
 }
@@ -22,6 +24,10 @@ const Beers = () => {
   const [breweries, setBreweries] = useState<Brewery[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ message: string; visible: boolean }>({
+    message: '',
+    visible: false
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,11 +63,25 @@ const Beers = () => {
 
   const handleFavoriteClick = (beer: BeerDisplay, event: React.MouseEvent) => {
     event.stopPropagation();
-    if (isFavorite(beer.id)) {
+    const isFav = isFavorite(beer.id);
+    
+    if (isFav) {
       removeFavorite(beer.id);
+      setToast({
+        message: `${beer.name} retiré des favoris`,
+        visible: true
+      });
     } else {
       addFavorite(beer);
+      setToast({
+        message: `${beer.name} ajouté aux favoris`,
+        visible: true
+      });
     }
+  };
+
+  const handleCloseToast = () => {
+    setToast(prev => ({ ...prev, visible: false }));
   };
 
   const openBeerDetails = (beer: BeerDisplay) => {
@@ -186,7 +206,16 @@ const Beers = () => {
             <div className="beers-grid">
               {filteredBeers.map((beer) => (
                 <div key={beer.id} className="beer-card" data-brewery={beer.brewery_id} onClick={() => openBeerDetails(beer)}>
-                  <img src={beer.image} alt={beer.name} />
+                  <div className="beer-image">
+                    <img src={beer.image} alt={beer.name} />
+                    <button
+                      className={`favorite-button ${isFavorite(beer.id) ? 'active' : ''}`}
+                      onClick={(e) => handleFavoriteClick(beer, e)}
+                      aria-label={isFavorite(beer.id) ? "Retirer des favoris" : "Ajouter aux favoris"}
+                    >
+                      <FaHeart className="heart-icon" />
+                    </button>
+                  </div>
                   <div className="beer-info">
                     <h3>{beer.name}</h3>
                     <p className="brewery">{breweries.find(b => b.id_brewery === beer.brewery_id)?.name}</p>
@@ -194,15 +223,6 @@ const Beers = () => {
                     <p className="volume">{beer.volume}</p>
                     <p className="price">{beer.price!.toFixed(2)} €</p>
                   </div>
-                  <button 
-                    className={`favorite-button ${isFavorite(beer.id) ? 'active' : ''}`}
-                    onClick={(e) => handleFavoriteClick(beer, e)}
-                  >
-                    {isFavorite(beer.id) ? 
-                      <FaHeart className="heart-icon filled" /> : 
-                      <FaRegHeart className="heart-icon" />
-                    }
-                  </button>
                 </div>
               ))}
             </div>
@@ -237,6 +257,13 @@ const Beers = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {toast.visible && (
+        <FavoriteToast
+          message={toast.message}
+          onClose={handleCloseToast}
+        />
       )}
     </div>
   );
