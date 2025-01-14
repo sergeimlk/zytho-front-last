@@ -15,6 +15,7 @@ Bienvenue sur mon application de découverte de bières craft ! Cette applicatio
 - [📱 Fonctionnalités](#-fonctionnalités)
 - [🔧 Configuration](#-configuration)
 - [📝 Notes de Développement](#-notes-de-développement)
+- [🚀 Déploiement sur Vercel](#-déploiement-sur-vercel)
 
 ## 🚀 Prérequis
 
@@ -175,6 +176,27 @@ npm run dev -- --force
 - Vérifiez les types dans `src/types`
 - Mettez à jour les dépendances
 
+## 🚀 Déploiement sur Vercel
+
+Pour déployer ce projet sur Vercel :
+
+1. **Configuration du Projet**
+   - Framework Preset: `Vite`
+   - Root Directory: `./`
+   - Build Command: `vite build`
+   - Output Directory: `dist`
+   - Install Command: `npm install`
+
+2. **Variables d'Environnement**
+   Assurez-vous de configurer les variables d'environnement nécessaires dans les paramètres du projet Vercel :
+   ```env
+   VITE_API_URL=votre_url_api
+   ```
+
+3. **Déploiement Automatique**
+   - Le déploiement se fait automatiquement à chaque push sur la branche `main`
+   - Vercel créera automatiquement des previews pour chaque pull request
+
 ## 🤝 Contribution
 
 <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG5mMXE1aTd0Z3RyOGF2ZzA0dXdsZjdvc2U2aTN4OHlvYWN0ZzY4MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pHb82xtBPfqEg/giphy.gif" width="150" />
@@ -205,5 +227,3 @@ Ce projet est Un brief effectué pour la formation, CDA chez Simplon
 <img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" width="150" />
 <img src="https://media.giphy.com/media/KB8C86UMgLDThpt4WT/giphy.gif" width="150" />
 <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" width="150" />
-
-
