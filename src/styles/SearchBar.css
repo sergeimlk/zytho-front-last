@@ -1,0 +1,85 @@
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  padding-right: 3rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-transparent);
+}
+
+.search-toggle {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  color: var(--text-gray);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.search-toggle:hover {
+  color: var(--primary);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .search-bar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0.5rem 1rem;
+    background: var(--background-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .search-bar.expanded {
+    transform: translateY(0);
+  }
+
+  .search-input {
+    background: var(--background);
+  }
+
+  /* Styles spécifiques pour la page d'accueil */
+  .home-search {
+    position: static;
+    transform: none;
+    margin: 1rem auto;
+    max-width: 90%;
+  }
+
+  /* Styles spécifiques pour les pages de liste */
+  .list-search {
+    top: auto;
+    bottom: 70px;
+    transform: translateY(100%);
+    background: var(--background);
+    border-top: 1px solid var(--border);
+  }
+
+  .list-search.expanded {
+    transform: translateY(0);
+  }
+}
