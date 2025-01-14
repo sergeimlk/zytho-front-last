@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Beer, Brewery } from '../types/api.types';
 
-const API_BASE_URL = 'http://localhost:3000/api/v1';
+const API_BASE_URL = 'http://localhost:3000/api';
 
 export const apiService = {
     // Bières
@@ -23,11 +23,6 @@ export const apiService = {
 
     getBreweryById: async (id: number): Promise<Brewery> => {
         const response = await axios.get(`${API_BASE_URL}/breweries/${id}`);
-        return response.data;
-    },
-
-    getBeersByBrewery: async (breweryId: number): Promise<Beer[]> => {
-        const response = await axios.get(`${API_BASE_URL}/breweries/${breweryId}/beers`);
         return response.data;
     }
 };
