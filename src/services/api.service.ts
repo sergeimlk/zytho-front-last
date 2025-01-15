@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Beer, Brewery } from '../types/api.types';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'http://localhost:3000/api/v1';
 
 export const apiService = {
     // Bières

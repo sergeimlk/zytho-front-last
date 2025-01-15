@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: zythologue-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: securepassword
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persist the database data
+      - ./db-scripts:/docker-entrypoint-initdb.d # Load the database schema
+
+volumes:
+  postgres_data:
+
+
+# To connect to the PostgreSQL database using DBeaver:
+# 1. Open DBeaver and create a new connection.
+# 2. Select PostgreSQL as the database type.
+# 3. Use the following connection details:
+#    - Host: localhost
+#    - Port: 5432
+#    - Database: postgres
+#    - Username: postgres
+#    - Password: securepassword
+# 4. Test the connection and save it.
