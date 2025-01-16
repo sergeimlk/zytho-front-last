@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Beers.css';
 import SearchBar from '../components/SearchBar';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
@@ -9,8 +9,6 @@ import FavoriteToast from '../components/FavoriteToast';
 
 interface BeerDisplay extends ApiBeer {
   id: number;
-  volume?: ReactNode;
-  category_id?: string;
   image: string;
   price?: number;
 }
@@ -26,10 +24,7 @@ const Beers = () => {
   const [breweries, setBreweries] = useState<Brewery[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [toast, setToast] = useState<{ message: string; visible: boolean }>({
-    message: '',
-    visible: false
-  });
+  const [toast, setToast] = useState({ visible: false, message: '', type: '' as 'success' | 'error' });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,21 +34,19 @@ const Beers = () => {
           apiService.getAllBreweries()
         ]);
 
-        // Ajouter des images par défaut et un prix fictif pour les bières
         const beersWithDisplay = beersData.map(beer => ({
           ...beer,
           id: beer.id_beer,
           image: "https://www.belharra.eus/files/BIERES/baleharra-33-blonde.png",
-          price: beer.abv ? beer.abv * 0.8 : 5.0 // Default price of 5.0 if abv is not available
+          price: beer.abv ? beer.abv * 0.8 : 5.0
         }));
 
         setBeers(beersWithDisplay);
         setBreweries(breweriesData);
         setLoading(false);
       } catch (err) {
-        setError('Erreur lors du chargement des données');
+        setError("Erreur lors du chargement des données");
         setLoading(false);
-        console.error('Erreur:', err);
       }
     };
 
@@ -68,31 +61,26 @@ const Beers = () => {
     event.stopPropagation();
     const isFav = isFavorite(beer.id_beer);
     
-    if (isFav) {
-      removeFavorite(beer.id_beer);
-      setToast({
-        message: `${beer.name} retiré des favoris`,
-        visible: true
-      });
-    } else {
-      addFavorite(beer);
-      setToast({
-        message: `${beer.name} ajouté aux favoris`,
-        visible: true
-      });
+    try {
+      if (isFav) {
+        removeFavorite(beer.id_beer);
+        setToast({ visible: true, message: 'Bière retirée des favoris', type: 'success' });
+      } else {
+        addFavorite(beer);
+        setToast({ visible: true, message: 'Bière ajoutée aux favoris', type: 'success' });
+      }
+    } catch (error) {
+      setToast({ visible: true, message: 'Erreur lors de la mise à jour des favoris', type: 'error' });
     }
   };
 
-  const handleCloseToast = () => {
+  const handleToastClose = () => {
     setToast(prev => ({ ...prev, visible: false }));
   };
 
   const openBeerDetails = (beer: BeerDisplay) => {
     setSelectedBeer(beer);
   };
-
-  if (loading) return <div className="loading">Chargement...</div>;
-  if (error) return <div className="error">{error}</div>;
 
   const types = [...new Set(beers
     .map(beer => beer.category_id)
@@ -117,24 +105,45 @@ const Beers = () => {
     return matchesSearch && matchesType && matchesBrewery && matchesPrice;
   });
 
+  if (loading) return (
+    <div role="status" aria-live="polite" className="loading" aria-busy="true">
+      <span className="visually-hidden">Chargement des bières en cours</span>
+      Chargement...
+    </div>
+  );
+
+  if (error) return (
+    <div role="alert" className="error" aria-live="assertive">
+      {error}
+    </div>
+  );
+
   return (
     <div className="beers-container">
-      <h1 className="page-title">🍺 Nos Bières Artisanales</h1>
+      <h1 className="page-title" tabIndex={0}>Nos Bières Artisanales</h1>
       <div className="beers-content">
         <div className="beers-page">
-          <aside className="filters-sidebar">
+          <aside className="filters-sidebar" aria-label="Filtres de recherche">
             <div className="filter-section">
               <SearchBar
                 onSearch={handleSearch}
                 placeholder="Rechercher une bière..."
                 className="beers-search"
+                label="Rechercher une bière"
               />
             </div>
+
             <div className="filter-section">
-              <h3>Prix</h3>
-              <div className="price-range">
+              <h2 id="price-filter-label">Prix</h2>
+              <div 
+                className="price-range" 
+                role="group" 
+                aria-labelledby="price-filter-label"
+              >
                 <div className="range-inputs">
+                  <label className="visually-hidden" htmlFor="min-price">Prix minimum</label>
                   <input 
+                    id="min-price"
                     type="range" 
                     min={0} 
                     max={20} 
@@ -144,8 +153,14 @@ const Beers = () => {
                       setPriceRange([Math.min(min, priceRange[1]), priceRange[1]]);
                     }}
                     className="range-input min-range"
+                    aria-valuemin={0}
+                    aria-valuemax={20}
+                    aria-valuenow={priceRange[0]}
+                    aria-label="Prix minimum"
                   />
+                  <label className="visually-hidden" htmlFor="max-price">Prix maximum</label>
                   <input 
+                    id="max-price"
                     type="range" 
                     min={0} 
                     max={20} 
@@ -155,17 +170,25 @@ const Beers = () => {
                       setPriceRange([priceRange[0], Math.max(max, priceRange[0])]);
                     }}
                     className="range-input max-range"
+                    aria-valuemin={0}
+                    aria-valuemax={20}
+                    aria-valuenow={priceRange[1]}
+                    aria-label="Prix maximum"
                   />
                 </div>
-                <div className="price-display">
-                  <span>{priceRange[0]}€ - {priceRange[1]}€</span>
+                <div className="price-display" aria-live="polite">
+                  <span>Entre {priceRange[0]}€ et {priceRange[1]}€</span>
                 </div>
               </div>
             </div>
 
             <div className="filter-section">
-              <h3>Type de bière</h3>
-              <div className="checkbox-group">
+              <h2 id="type-filter-label">Type de bière</h2>
+              <div 
+                className="checkbox-group"
+                role="group"
+                aria-labelledby="type-filter-label"
+              >
                 {types.map(type => (
                   <label key={type} className="filter-checkbox">
                     <input
@@ -178,6 +201,7 @@ const Beers = () => {
                           setSelectedTypes([...selectedTypes, type]);
                         }
                       }}
+                      aria-label={`Filtrer par type: ${type}`}
                     />
                     {type}
                   </label>
@@ -186,8 +210,12 @@ const Beers = () => {
             </div>
 
             <div className="filter-section">
-              <h3>Brasserie</h3>
-              <div className="checkbox-group">
+              <h2 id="brewery-filter-label">Brasserie</h2>
+              <div 
+                className="checkbox-group"
+                role="group"
+                aria-labelledby="brewery-filter-label"
+              >
                 {breweryNames.map(brewery => (
                   <label key={brewery} className="filter-checkbox">
                     <input
@@ -200,6 +228,7 @@ const Beers = () => {
                           setSelectedBreweries([...selectedBreweries, brewery]);
                         }
                       }}
+                      aria-label={`Filtrer par brasserie: ${brewery}`}
                     />
                     {brewery}
                   </label>
@@ -209,53 +238,101 @@ const Beers = () => {
           </aside>
           
           <main className="beers-main">
-            <div className="beers-grid">
+            <div 
+              className="beers-grid" 
+              role="list"
+              aria-label="Liste des bières"
+            >
               {filteredBeers.map((beer) => (
-                <div key={beer.id} className="beer-card" data-brewery={beer.brewery_id} onClick={() => openBeerDetails(beer)}>
+                <article 
+                  key={beer.id} 
+                  className="beer-card" 
+                  role="listitem"
+                  onClick={() => openBeerDetails(beer)}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      openBeerDetails(beer);
+                    }
+                  }}
+                  tabIndex={0}
+                  aria-label={`${beer.name} par ${breweries.find(b => b.id_brewery === beer.brewery_id)?.name}`}
+                >
                   <div className="beer-image">
-                    <img src={beer.image} alt={beer.name} />
+                    <img src={beer.image} alt={`Bouteille de ${beer.name}`} />
                     <button
                       className={`favorite-button ${isFavorite(beer.id_beer) ? 'active' : ''}`}
                       onClick={(e) => handleFavoriteClick(beer, e)}
-                      aria-label={isFavorite(beer.id_beer) ? "Retirer des favoris" : "Ajouter aux favoris"}
+                      aria-label={isFavorite(beer.id_beer) ? `Retirer ${beer.name} des favoris` : `Ajouter ${beer.name} aux favoris`}
+                      aria-pressed={isFavorite(beer.id_beer)}
                     >
-                      <FaHeart className="heart-icon" />
+                      {isFavorite(beer.id_beer) ? (
+                        <FaHeart className="heart-icon" aria-hidden="true" />
+                      ) : (
+                        <FaRegHeart className="heart-icon" aria-hidden="true" />
+                      )}
                     </button>
                   </div>
                   <div className="beer-info">
                     <h3>{beer.name}</h3>
                     <p className="brewery">{breweries.find(b => b.id_brewery === beer.brewery_id)?.name}</p>
                     <p className="type">{beer.category_id}</p>
-                    <p className="volume">{beer.volume}</p>
-                    <p className="price">{beer.price!.toFixed(2)} €</p>
+                    <p className="price" aria-label={`Prix: ${beer.price!.toFixed(2)} euros`}>
+                      {beer.price!.toFixed(2)} €
+                    </p>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </main>
         </div>
       </div>
 
-      {/* Modal de détails de la bière */}
       {selectedBeer && (
-        <div className="beer-modal-overlay" onClick={() => setSelectedBeer(null)}>
-          <div className="beer-modal-content" onClick={e => e.stopPropagation()}>
-            <button className="close-modal" onClick={() => setSelectedBeer(null)}>&times;</button>
+        <div 
+          className="beer-modal-overlay" 
+          onClick={() => setSelectedBeer(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={`modal-title-${selectedBeer.id}`}
+        >
+          <div 
+            className="beer-modal-content" 
+            onClick={e => e.stopPropagation()}
+            role="document"
+          >
+            <button 
+              className="close-modal" 
+              onClick={() => setSelectedBeer(null)}
+              aria-label="Fermer les détails de la bière"
+            >
+              &times;
+            </button>
             <div className="beer-modal-header">
-              <img src={selectedBeer.image} alt={selectedBeer.name} className="modal-beer-image" />
+              <img 
+                src={selectedBeer.image} 
+                alt={`Bouteille de ${selectedBeer.name}`} 
+                className="modal-beer-image" 
+              />
               <div className="modal-beer-info">
-                <h2>{selectedBeer.name}</h2>
-                <p className="modal-brewery">{breweries.find(b => b.id_brewery === selectedBeer.brewery_id)?.name}</p>
+                <h2 id={`modal-title-${selectedBeer.id}`}>{selectedBeer.name}</h2>
+                <p className="modal-brewery">
+                  {breweries.find(b => b.id_brewery === selectedBeer.brewery_id)?.name}
+                </p>
                 <p className="modal-type">{selectedBeer.category_id}</p>
-                <p className="modal-volume">{selectedBeer.volume}</p>
-                <p className="modal-price">{selectedBeer.price!.toFixed(2)} €</p>
+                <p className="modal-price" aria-label={`Prix: ${selectedBeer.price!.toFixed(2)} euros`}>
+                  {selectedBeer.price!.toFixed(2)} €
+                </p>
                 <button 
                   className={`modal-favorite-button ${isFavorite(selectedBeer.id_beer) ? 'active' : ''}`}
                   onClick={(e) => handleFavoriteClick(selectedBeer, e)}
+                  aria-label={isFavorite(selectedBeer.id_beer) ? 
+                    `Retirer ${selectedBeer.name} des favoris` : 
+                    `Ajouter ${selectedBeer.name} aux favoris`}
+                  aria-pressed={isFavorite(selectedBeer.id_beer)}
                 >
                   {isFavorite(selectedBeer.id_beer) ? 
-                    <FaHeart className="heart-icon filled" /> : 
-                    <FaRegHeart className="heart-icon" />
+                    <FaHeart className="heart-icon filled" aria-hidden="true" /> : 
+                    <FaRegHeart className="heart-icon" aria-hidden="true" />
                   }
                   {isFavorite(selectedBeer.id_beer) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
                 </button>
@@ -268,7 +345,8 @@ const Beers = () => {
       {toast.visible && (
         <FavoriteToast
           message={toast.message}
-          onClose={handleCloseToast}
+          type={toast.type}
+          onClose={handleToastClose}
         />
       )}
     </div>

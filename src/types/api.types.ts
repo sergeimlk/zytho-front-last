@@ -1,5 +1,6 @@
 
 export interface Beer {
+    image: any;
     abv: number;
     id_beer: number;
     name: string;
