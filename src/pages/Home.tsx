@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Home.css';
-import SearchBar from '../components/SearchBar';
+// import SearchBar from '../components/SearchBar';
 import ImageCarousel from '../components/ImageCarousel';
 
 const slides = [
@@ -109,16 +109,16 @@ const Home: React.FC = () => {
             >
               <div className="hero-content">
                 <div className="hero-text">
-                  <div className="new-label">{slide.label}</div>
+                  {slide.label && <div className="new-label">{slide.label}</div>}
                   <h1>{slide.title}</h1>
                   <h2>{slide.subtitle}</h2>
                   <p>{slide.description}</p>
+                  <Link to="/beers" className="btn btn-dark">
+                    Voir la sélection
+                  </Link>
                 </div>
                 <div className="hero-image">
                   <img src={slide.image} alt={slide.title} />
-                  <Link to="/beers" className="btn btn-dark">
-                    Plus de bières
-                  </Link>
                 </div>
               </div>
             </div>
