@@ -98,10 +98,13 @@ section h2 {
 }
 
 .tech-category {
-  composes: card from './components/Card.css';
+  /* composes: card from './components/Card.css'; */
   text-align: center;
   position: relative;
   overflow: hidden;
+  border-radius: 2rem;
+  padding: 1rem;
+  transition: all 0.3s ease;
 }
 
 .tech-category:hover {
@@ -167,7 +170,7 @@ section h2 {
 .development-phase {
   background: var(--background-light);
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: 2rem;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
   min-width: 300px;
@@ -222,7 +225,7 @@ section h2 {
 .feature-card {
   background: var(--background-light);
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: 2rem;
   text-align: center;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
@@ -279,7 +282,7 @@ section h2 {
 .api-feature {
   background: var(--background);
   padding: 1.5rem;
-  border-radius: 0.8rem;
+  border-radius: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -337,7 +340,7 @@ section h2 {
 .api-feature {
   background: var(--background);
   padding: 2rem;
-  border-radius: 0.5rem;
+  border-radius: 2rem;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
@@ -626,7 +629,7 @@ section h2 {
 .docker-feature {
   background: var(--background);
   padding: 2rem;
-  border-radius: 0.5rem;
+  border-radius: 2rem;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 

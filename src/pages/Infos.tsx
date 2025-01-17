@@ -34,10 +34,10 @@ const Infos: React.FC = () => {
       category: "UI/UX & Styling",
       items: [
         { 
-          name: "TailwindCSS", 
+          name: "CSS Modules", 
           icon: "🎨", 
-          description: "Framework CSS utility-first pour un design moderne et responsive",
-          docUrl: "https://tailwindcss.com/"
+          description: "CSS modulaire avec variables personnalisées pour un design cohérent et maintenable",
+          docUrl: "https://developer.mozilla.org/fr/docs/Web/CSS/Using_CSS_custom_properties"
         },
         { 
           name: "React Icons", 
@@ -46,10 +46,10 @@ const Infos: React.FC = () => {
           docUrl: "https://react-icons.github.io/react-icons/"
         },
         { 
-          name: "Framer Motion", 
+          name: "FontAwesome", 
           icon: "✨", 
-          description: "Animations fluides et interactives",
-          docUrl: "https://www.framer.com/motion/"
+          description: "Collection d'icônes vectorielles et d'outils de style",
+          docUrl: "https://fontawesome.com/"
         }
       ]
     },
