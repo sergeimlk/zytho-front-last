@@ -1,6 +1,6 @@
 .breweries-container {
   padding: 4rem 2rem;
-  max-width: 1200px;
+  max-width: var(--container-width-xl);
   margin: 0 auto;
 }
 
@@ -170,149 +170,204 @@
 
 .breweries-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
+  gap: var(--grid-gap-mobile);
+  grid-template-columns: repeat(1, 1fr);
+  width: 100%;
+  padding: var(--container-padding-mobile);
 }
 
-.brewery-detail-card {
-  background: var(--card-background);
-  border-radius: 15px;
+@media (min-width: 640px) {
+  .breweries-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--grid-gap-tablet);
+    padding: var(--container-padding-tablet);
+  }
+}
+
+@media (min-width: 768px) {
+  .breweries-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .breweries-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--grid-gap-desktop);
+    padding: var(--container-padding-desktop);
+  }
+}
+
+.breweries-container {
+  width: 100%;
+  max-width: var(--container-width-xl);
+  margin: 0 auto;
+  padding: var(--container-padding-mobile);
+}
+
+@media (max-width: 640px) {
+  .breweries-container {
+    padding: var(--container-padding-mobile);
+  }
+  
+  .brewery-card {
+    margin-bottom: var(--grid-gap-mobile);
+  }
+}
+
+.brewery-card {
+  composes: card from './components/Card.css';
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-  transition: transform 0.2s;
 }
 
-.brewery-detail-card:hover {
-  transform: translateY(-5px);
-  transform: translateY(-4px);
-}
-
-.brewery-header {
-  padding: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.brewery-header h2 {
-  font-size: 1.5rem;
-  color: var(--text-light);
-  margin-bottom: 0.5rem;
-}
-
-.location {
-  color: var(--text-gray);
-  font-size: 0.9rem;
-}
-
-.brewery-content {
-  padding: 1.5rem;
+.brewery-image-container {
+  position: relative;
+  width: calc(100% + 3rem);
+  height: 250px;
+  margin: -1.5rem -1.5rem 1rem -1.5rem;
+  overflow: hidden;
 }
 
 .brewery-image {
   width: 100%;
-  height: 200px;
-  margin-bottom: 1.5rem;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.brewery-image img {
-  width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.description {
-  color: var(--text-gray);
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
+.brewery-card:hover .brewery-image {
+  transform: scale(1.1);
 }
 
-.specialties {
-  margin-bottom: 1.5rem;
-}
-
-.specialties h3 {
-  color: var(--text-light);
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.specialty-tags {
+.brewery-info {
+  flex: 1;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.brewery-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brewery-location {
+  font-size: 1rem;
+  color: var(--primary);
+  margin: 0;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
-.specialty-tag {
-  background: var(--background-dark);
-  color: var(--text-light);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
+.brewery-location svg {
+  font-size: 1.2rem;
 }
 
-.website-link {
-  display: inline-block;
+.brewery-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+.brewery-specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(var(--primary-rgb), 0.2);
+}
+
+.specialty-tag {
+  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.specialty-tag:hover {
+  background: var(--primary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.brewery-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.brewery-website {
   color: var(--primary);
   text-decoration: none;
+  font-size: 0.9rem;
   font-weight: 500;
-  transition: opacity 0.3s ease;
-}
-
-.website-link:hover {
-  opacity: 0.8;
-}
-
-.beers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.beer-item {
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.beer-item:hover {
-  transform: translateY(-5px);
-}
-
-.beer-item img {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  transition: transform 0.3s ease;
+  background: rgba(var(--primary-rgb), 0.1);
 }
 
-.beer-item:hover img {
-  transform: scale(1.05);
+.brewery-website:hover {
+  background: var(--primary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
 }
 
-.beer-item p {
-  font-size: 1rem;
-  color: var(--text-light);
-  margin-bottom: 0;
+@media (max-width: 768px) {
+  .breweries-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .brewery-card {
+    min-height: 400px;
+  }
+
+  .brewery-image-container {
+    height: 200px;
+  }
+
+  .brewery-name {
+    font-size: 1.25rem;
+  }
 }
 
-.pack-image {
-  margin-top: 2rem;
-  text-align: center;
-}
+@media (max-width: 480px) {
+  .breweries-grid {
+    grid-template-columns: 1fr;
+  }
 
-.pack-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-  transition: transform 0.3s ease;
-}
+  .brewery-card {
+    min-height: 350px;
+  }
 
-.pack-image img:hover {
-  transform: scale(1.02);
+  .brewery-image-container {
+    height: 180px;
+  }
 }
 
 /* Modal Styles */

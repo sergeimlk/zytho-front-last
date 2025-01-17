@@ -244,6 +244,36 @@
   font-size: 2rem;
 }
 
+.feature-card {
+  composes: card from './components/Card.css';
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.news-card {
+  composes: card from './components/Card.css';
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.event-card {
+  composes: card from './components/Card.css';
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .hero-text h1 {

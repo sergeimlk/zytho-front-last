@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import './components/Card.css';
 
 :root {
   --primary: #F2994A;
@@ -12,6 +13,46 @@
   --gradient-main: linear-gradient(90deg, #D23B3B 0%, #F2994A 100%);
   --border-color: #404040;
   --input-background: #333333;
+  --primary-transparent: rgba(var(--primary-rgb), 0.3);
+  --secondary-transparent: rgba(219, 59, 59, 0.3);
+  --accent-transparent: rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.2);
+
+  --container-padding-mobile: 1rem;
+  --container-padding-tablet: 2rem;
+  --container-padding-desktop: 3rem;
+  
+  --container-width-sm: 640px;
+  --container-width-md: 768px;
+  --container-width-lg: 1024px;
+  --container-width-xl: 1280px;
+  
+  --grid-gap-mobile: 1rem;
+  --grid-gap-tablet: 1.5rem;
+  --grid-gap-desktop: 2rem;
+  
+  --card-border-radius: 1rem;
+  --card-padding-mobile: 1rem;
+  --card-padding-tablet: 1.5rem;
+  --card-padding-desktop: 2rem;
+  
+  --hover-transform: translateY(-5px);
+  --active-transform: scale(0.98);
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-duration: 0.3s;
+  
+  /* Variables pour le scroll */
+  --scrollbar-width: 8px;
+  --scrollbar-track-color: rgba(255, 255, 255, 0.1);
+  --scrollbar-thumb-color: var(--primary);
+  --navbar-height: 56px;
+  --navbar-padding: 0.75rem;
+  --navbar-mobile-padding: 0.5rem;
+  --navbar-border-color: rgba(255, 255, 255, 0.1);
+  --navbar-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 * {
@@ -20,11 +61,84 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
 body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
   font-family: 'Montserrat', sans-serif;
   background-color: var(--background-dark);
   color: var(--text-light);
   line-height: 1.5;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: var(--navbar-height);
+}
+
+main {
+  min-height: calc(100vh - var(--navbar-height));
+  width: 100%;
+  max-width: var(--container-width-xl);
+  margin: 0 auto;
+  padding-top: var(--navbar-height);
+}
+
+.container {
+  flex: 1;
+  width: 100%;
+  padding: var(--container-padding-mobile);
+  margin: 0 auto;
+  max-width: var(--container-width-sm);
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--container-padding-mobile);
+}
+
+.grid {
+  display: grid;
+  gap: var(--grid-gap-mobile);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: var(--container-width-sm);
+    padding: var(--container-padding-tablet);
+  }
+  
+  .grid {
+    gap: var(--grid-gap-tablet);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: var(--container-width-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: var(--container-width-lg);
+    padding: var(--container-padding-desktop);
+  }
+  
+  .grid {
+    gap: var(--grid-gap-desktop);
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: var(--container-width-xl);
+  }
 }
 
 h1 {
@@ -59,19 +173,6 @@ small {
   min-height: 100vh;
 }
 
-.container {
-  flex: 1;
-  width: 100%;
-  padding: 2rem;
-  margin: 0 auto;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
 /* Buttons */
 .btn {
   padding: 0.75rem 1.5rem;
@@ -104,8 +205,8 @@ small {
 /* Cards */
 .card {
   background-color: var(--card-background);
-  border-radius: 0.5rem;
-  padding: 1rem;
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding-mobile);
   transition: transform 0.2s;
 }
 
@@ -265,5 +366,62 @@ small {
   .page-title {
     font-size: 1.2rem;
     margin-top: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+  
+  main {
+    padding: var(--container-padding-mobile);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Styles pour la scrollbar */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+  border-radius: calc(var(--scrollbar-width) / 2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color);
+  border-radius: calc(var(--scrollbar-width) / 2);
+}
+
+/* Conteneur principal */
+.main-container {
+  height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Support pour Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+
+/* Optimisations tactiles */
+@media (hover: none) {
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  * {
+    scrollbar-width: none;
   }
 }

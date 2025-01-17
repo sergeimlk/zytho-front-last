@@ -254,35 +254,36 @@ const Breweries = () => {
           {filteredBreweries.map(brewery => (
             <div 
               key={brewery.id_brewery} 
-              className="brewery-detail-card"
+              className="brewery-card"
               onClick={() => handleBreweryClick(brewery)}
             >
-              <div className="brewery-header">
-                <h2>{brewery.name}</h2>
-                <p className="location">{brewery.location}</p>
+              <div className="brewery-image-container">
+                <img 
+                  src={brewery.image} 
+                  alt={brewery.name} 
+                  className="brewery-image"
+                />
               </div>
-              <div className="brewery-content">
-                <div className="brewery-image">
-                  <img src={brewery.image} alt={brewery.name} />
+              <div className="brewery-info">
+                <h2 className="brewery-name">{brewery.name}</h2>
+                <p className="brewery-location">{brewery.location}</p>
+                <p className="brewery-description">{brewery.description}</p>
+                <div className="brewery-specialties">
+                  {brewery.specialties.map((specialty, index) => (
+                    <span key={index} className="specialty-tag">{specialty}</span>
+                  ))}
                 </div>
-                <p className="description">{brewery.description}</p>
-                <div className="specialties">
-                  <h3>Nos bières:</h3>
-                  <div className="specialty-tags">
-                    {brewery.specialties.map((specialty, index) => (
-                      <span key={index} className="specialty-tag">{specialty}</span>
-                    ))}
-                  </div>
+                <div className="brewery-footer">
+                  <a 
+                    href={brewery.website} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="brewery-website"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Visiter le site web
+                  </a>
                 </div>
-                <a 
-                  href={brewery.website} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="website-link"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  Visiter le site web →
-                </a>
               </div>
             </div>
           ))}
