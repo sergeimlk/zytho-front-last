@@ -122,7 +122,7 @@ const Beers = () => {
 
   return (
     <div className="beers-container">
-      <h1 className="page-title" tabIndex={0}>Nos Bières Artisanales</h1>
+      <h1 className="page-title" tabIndex={0}>🍻Nos Bières Artisanales🍻</h1>
       <div className="beers-content">
         <div className="beers-page">
           <aside className="filters-sidebar" aria-label="Filtres de recherche">

@@ -212,6 +212,60 @@ section h2 {
   line-height: 1.5;
 }
 
+.api-section {
+  padding: 2rem;
+  background: var(--background-light);
+  border-radius: 1rem;
+  margin: 2rem 0;
+}
+
+.api-section h2 {
+  color: var(--primary);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.api-section p {
+  color: var(--text-gray);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.api-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.api-feature {
+  background: var(--background);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.api-feature h3 {
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.api-feature p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.code-block {
+  background: var(--background-dark);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
 .api-integration {
   margin: 4rem 0;
   padding: 2rem;
@@ -250,22 +304,6 @@ section h2 {
   color: var(--text-secondary);
   margin-bottom: 1rem;
   line-height: 1.5;
-}
-
-.code-block {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 1rem;
-  border-radius: 8px;
-  overflow-x: auto;
-  margin-top: 1rem;
-}
-
-.code-block code {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.9rem;
-  color: #e6e6e6;
-  line-height: 1.4;
-  white-space: pre;
 }
 
 .development {
@@ -395,77 +433,65 @@ section h2 {
     padding: 1rem;
   }
 
-  .info-header {
-    padding: 1.5rem;
-    margin-bottom: 2rem;
+  .api-section {
+    padding: 1rem;
   }
 
-  .info-header h1 {
-    font-size: 2rem;
-  }
-
-  section h2 {
+  .api-section h2 {
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .tech-category:nth-child(1) .tech-items,
-  .tech-category:nth-child(2) .tech-items,
-  .tech-category:nth-child(3) .tech-items {
-    grid-template-columns: 1fr;
-  }
-
-  .tech-categories,
-  .development-steps,
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .tech-category,
-  .development-phase,
-  .feature-card {
-    padding: 1.5rem;
   }
 
   .api-features {
     grid-template-columns: 1fr;
   }
-  
+
   .api-feature {
     padding: 1rem;
   }
-  
+
   .code-block {
     font-size: 0.8rem;
+    padding: 0.8rem;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
-  .development-steps::before {
-    left: 1.5rem;
+  .tech-categories {
+    grid-template-columns: 1fr;
   }
-  
-  .step {
-    padding-left: 4rem;
+
+  .tech-category {
+    padding: 1rem;
   }
-  
-  .step::before {
-    left: 1rem;
-    width: 1.5rem;
+
+  .tech-items {
+    grid-template-columns: 1fr;
   }
-  
-  .step-icon {
-    left: 1.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
+
+  .development-steps {
+    padding: 1rem;
+  }
+
+  .development-phase {
+    min-width: auto;
+  }
+
+  .phase-header h3 {
     font-size: 1.2rem;
   }
-  
-  .step h3 {
-    font-size: 1.3rem;
+}
+
+@media (max-width: 480px) {
+  .code-block {
+    font-size: 0.75rem;
+    line-height: 1.3;
   }
-  
-  .step li {
-    font-size: 1rem;
-    padding-left: 1.5rem;
+
+  .api-feature h3 {
+    font-size: 1.2rem;
+  }
+
+  .api-feature p {
+    font-size: 0.9rem;
   }
 }

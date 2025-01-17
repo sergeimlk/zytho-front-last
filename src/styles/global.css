@@ -231,15 +231,6 @@ small {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.page-title:before,
-.page-title:after {
-  content: "•";
-  color: var(--secondary);
-  margin: 0 1rem;
-  font-size: 1.5rem;
-  vertical-align: middle;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-content {
@@ -262,5 +253,17 @@ small {
 
   h3 {
     font-size: 1.25rem;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+    margin-top: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.2rem;
+    margin-top: 2.5rem;
   }
 }

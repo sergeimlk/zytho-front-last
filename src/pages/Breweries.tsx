@@ -41,7 +41,7 @@ const BreweryModal: React.FC<BreweryModalProps> = ({ brewery, onClose, beers }) 
             <p>{brewery.description}</p>
           </div>
           <div className="brewery-modal-beers">
-            <h3>Nos Bières</h3>
+            <h3>🍻Nos Bières🍻</h3>
             <div className="beers-grid">
               {beers.map(beer => (
                 <div key={beer.id_beer} className="beer-card-mini">
@@ -207,7 +207,7 @@ const Breweries = () => {
 
   return (
     <div className="breweries-container">
-      <h1 className="page-title">🏭 Nos Brasseries Locales</h1>
+      <h1 className="page-title">🏭 Nos Brasseries Locales 🏭 </h1>
       
       {selectedBrewery && (
         <BreweryModal

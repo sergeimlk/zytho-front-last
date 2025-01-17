@@ -1,8 +1,8 @@
-# 🍺 Zytho - Application de Bières Craft
+# 🍺 Zytho - Application de Bières
 
 <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbml2MWV3Z2pqN2xuM2FxYXF2dHpzcTBxMzA1Nm54dGVhMGQyenlzYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QTgzmGzanMnhiwsBql/giphy.gif" width="200" />
 
-Bienvenue sur mon application de découverte de bières craft ! Cette application web moderne vous permet d'explorer une vaste collection de bières artisanales, de découvrir leurs caractéristiques et de gérer vos favorites.
+Bienvenue sur mon application de découverte de bières! Cette application web moderne vous permet d'explorer une vaste collection de bières artisanales, de découvrir leurs caractéristiques et de gérer vos favorites.
 
 ## 📋 Table des Matières
 

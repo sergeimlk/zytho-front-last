@@ -14,7 +14,6 @@
   gap: 2rem;
 }
 
-
 .left-column {
   width: 300px;
   flex-shrink: 0;
@@ -351,6 +350,14 @@
 
 .favorite-toast .heart-icon {
   color: #e74c3c;
+}
+
+.favorite-toast.success {
+  background: rgba(39, 174, 96, 0.9);
+}
+
+.favorite-toast.error {
+  background: rgba(231, 76, 60, 0.9);
 }
 
 @keyframes slideIn {

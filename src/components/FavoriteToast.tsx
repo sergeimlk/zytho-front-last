@@ -4,10 +4,11 @@ import '../styles/Beers.css';
 
 interface FavoriteToastProps {
   message: string;
+  type: "error" | "success";
   onClose: () => void;
 }
 
-const FavoriteToast: React.FC<FavoriteToastProps> = ({ message, onClose }) => {
+const FavoriteToast: React.FC<FavoriteToastProps> = ({ message, onClose, type }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
@@ -17,7 +18,7 @@ const FavoriteToast: React.FC<FavoriteToastProps> = ({ message, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="favorite-toast">
+    <div className={`favorite-toast ${type}`}>
       <FaHeart className="heart-icon" />
       <span>{message}</span>
     </div>

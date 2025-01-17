@@ -195,11 +195,11 @@ const Infos: React.FC = () => {
 
   return (
     <div className="info-container">
-      <h1 className="page-title">🍺 Documentation Technique</h1>
+      <h1 className="page-title">🍺 Documentation</h1>
       <div className="info-content">
         <div className="info-header">
           <h1>À Propos de Mon Projet</h1>
-          <p>Découvrez les technologies et l'architecture que j'ai utilisées pour développer cette application de bières craft.</p>
+          <p>Découvrez les technologies et l'architecture que j'ai utilisées pour développer cette application de bières.</p>
         </div>
 
         <section className="tech-stack">
@@ -246,9 +246,9 @@ const Infos: React.FC = () => {
           </div>
         </section>
 
-        <section className="api-integration">
+        <section className="api-section">
           <h2>{apiInfo.title}</h2>
-          <p className="api-description">{apiInfo.description}</p>
+          <p>{apiInfo.description}</p>
           <div className="api-features">
             {apiInfo.features.map((feature, index) => (
               <div key={index} className="api-feature">
