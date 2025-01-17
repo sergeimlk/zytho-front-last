@@ -113,12 +113,12 @@ const Home: React.FC = () => {
                   <h1>{slide.title}</h1>
                   <h2>{slide.subtitle}</h2>
                   <p>{slide.description}</p>
-                  <Link to="/beers" className="btn btn-dark">
-                    Plus de bières →
-                  </Link>
                 </div>
                 <div className="hero-image">
                   <img src={slide.image} alt={slide.title} />
+                  <Link to="/beers" className="btn btn-dark">
+                    Plus de bières
+                  </Link>
                 </div>
               </div>
             </div>
