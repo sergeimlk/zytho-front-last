@@ -39,7 +39,8 @@ const Beers = () => {
           ...beer,
           id: beer.id_beer,
           image: "https://www.belharra.eus/files/BIERES/baleharra-33-blonde.png",
-          price: beer.abv ? beer.abv * 0.8 : 5.0
+          price: beer.abv ? beer.abv * 0.8 : 5.0,
+          category_id: beer.type || 'Unknown'
         }));
 
         setBeers(beersWithDisplay);

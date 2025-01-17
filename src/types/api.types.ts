@@ -1,5 +1,8 @@
+import { ReactNode } from "react";
 
 export interface Beer {
+    type: ReactNode;
+    alcohol: any;
     image: any;
     abv: number;
     id_beer: number;

@@ -23,53 +23,106 @@ Avant de commencer, assurez-vous d'avoir installé :
 - Node.js (version 16.0.0 ou supérieure) 📦
 - npm (version 8.0.0 ou supérieure) 🔧
 - Git 🌳
-<img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" width="150" />
+- Docker Desktop 🐳
 
+<img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" width="150" />
 
 ## ⚙️ Installation
 
-
 1. **Clonez le repository** 📥
 ```bash
-git clone https://github.com/votre-username/zytho.git
+git clone https://github.com/sergeimlk/zytho.git
 cd zytho
 ```
 
-2. **Installez les dépendances** 📦
+2. **Configuration du Backend** 🔧
 ```bash
-npm install
-```
+# Aller dans le dossier backend
+cd BACK-API
 
-3. **Créez votre fichier de variables d'environnement** 🔐
-```bash
+# Installer les dépendances
+npm install
+
+# Copier et configurer les variables d'environnement
 cp .env.example .env
 ```
 
-4. **Configurez vos variables d'environnement** ⚙️
-Ouvrez le fichier `.env` et ajustez les variables selon vos besoins :
+3. **Configurer le fichier .env du Backend** ⚙️
 ```env
-VITE_API_URL=https://api.punkapi.com/v2
-VITE_APP_TITLE=Zytho
+DB_USER=postgres
+DB_PASSWORD=securepassword
+DB_HOST=localhost
+DB_DATABASE=postgres
+DB_PORT=5432
+PORT=3000
 ```
-<img src="https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" width="150" />
 
+4. **Configuration du Frontend** 🔧
+```bash
+# Retourner au dossier principal
+cd ..
+
+# Installer les dépendances
+npm install
+
+# Copier et configurer les variables d'environnement
+cp .env.example .env
+```
+
+<img src="https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif" width="150" />
 
 ## 🎮 Lancement du Projet
 
 <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDlpb3g5MXkyOHR5YjYxN3c0MThib3J6Z2JrMTV3b3hkZnVqcTF5aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Y3jwwe1xIpkDZXQXn3/giphy.gif" width="150" />
 
-1. **Mode développement** 🔧
+1. **Lancer la base de données** 🗄️
 ```bash
+# Dans le dossier BACK-API
+cd BACK-API
+docker-compose up -d
+```
+✅ La base de données est prête quand vous voyez "zythologue-db Started"
+
+2. **Lancer le backend** 🚀
+```bash
+# Toujours dans BACK-API
+npm start
+```
+✅ Le backend est prêt quand vous voyez "Server is running on port 3000"
+
+3. **Lancer le frontend** 💻
+```bash
+# Retourner au dossier principal
+cd ..
 npm run dev
 ```
-L'application sera accessible à l'adresse : `http://localhost:5173`
+✅ Le frontend est prêt quand vous voyez l'URL locale (http://localhost:5173)
 
-2. **Mode production** 🚀
+4. **Accéder à l'application** 🌐
+- Ouvrez votre navigateur
+- Accédez à http://localhost:5173
+- Naviguez vers la page "Bières" pour voir toutes les bières de la base de données
+
+### En cas de problèmes 🔧
+
+1. **Docker ne démarre pas**
+- Vérifiez que Docker Desktop est lancé (icône verte dans la barre de menu)
+- Redémarrez Docker Desktop si nécessaire
+
+2. **La base de données ne se connecte pas**
 ```bash
-npm run build
-npm run preview
+# Vérifier que le container est bien lancé
+docker ps
+# Vous devriez voir "zythologue-db" dans la liste
 ```
-L'application sera accessible à l'adresse : `http://localhost:4173`
+
+3. **Le backend ne démarre pas**
+- Vérifiez que la base de données est bien lancée
+- Vérifiez les variables d'environnement dans `BACK-API/.env`
+
+4. **Le frontend ne charge pas les données**
+- Vérifiez que le backend tourne sur http://localhost:3000
+- Vérifiez les logs du backend
 
 ## 🛠️ Technologies Utilisées
 
