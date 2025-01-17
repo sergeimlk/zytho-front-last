@@ -320,7 +320,7 @@
   .hero-slider {
     margin-top: -2rem;
     height: 400px;
-    border-radius: 0;
+    border-radius: 1.5rem;
     margin: -2rem -1rem 0;
     position: relative;
   }
@@ -366,8 +366,9 @@
   }
 
   .hero-text p {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: white;
+    text-align: left;
   }
 
   .hero-image {
@@ -437,5 +438,34 @@
 
   .hero-arrows {
     display: none;
+  }
+
+  .home-carousel {
+    padding: 1rem;
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .home-carousel h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-light);
+  }
+
+  .carousel-container {
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .carousel-slide {
+    border-radius: 1rem;
+  }
+
+  .carousel-slide img {
+    border-radius: 0.8rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   }
 }
