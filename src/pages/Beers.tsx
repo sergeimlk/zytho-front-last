@@ -8,6 +8,7 @@ import { useFavorites } from '../context/FavoritesContext';
 import FavoriteToast from '../components/FavoriteToast';
 
 interface BeerDisplay extends ApiBeer {
+  category_id: any;
   id: number;
   image: string;
   price?: number;

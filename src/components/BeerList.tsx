@@ -90,75 +90,63 @@ export const BeerList: React.FC<BeerListProps> = ({
       className="beers-section"
     >
       <div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 p-2 sm:p-4 mx-auto max-w-7xl"
         role="list"
       >
         {apiBeers.map((beer) => (
           <article 
             key={beer.id_beer} 
-            className={`beer-card ${selectedBeer === beer.id_beer ? 'selected' : ''}`}
+            className={`beer-card flex flex-col p-3 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow
+              ${selectedBeer === beer.id_beer ? 'selected border-2 border-amber-500' : ''}`}
             role="listitem"
             tabIndex={0}
             onClick={() => {
-              if (onBeerClick) onBeerClick(beer);
+              if (onBeerClick) {
+                onBeerClick(beer);
+              }
               setSelectedBeer(selectedBeer === beer.id_beer ? null : beer.id_beer);
             }}
             onKeyDown={(e) => handleKeyPress(e, beer)}
-            aria-expanded={selectedBeer === beer.id_beer}
-            aria-labelledby={`beer-name-${beer.id_beer}`}
+            aria-selected={selectedBeer === beer.id_beer}
           >
-            <div className="beer-header">
-              <h2 
-                id={`beer-name-${beer.id_beer}`}
-                className="beer-title"
-              >
+            <div className="flex justify-between items-start mb-2">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 flex-grow">
                 {beer.name}
-                {beer.abv && (
-                  <span 
-                    className="beer-abv" 
-                    aria-label={`${beer.abv}% d'alcool`}
-                  >
-                    ({beer.abv}%)
-                  </span>
-                )}
-              </h2>
-              {beer.image && (
-                <img 
-                  src={beer.image}
-                  alt={`Bouteille de ${beer.name}`}
-                  className="beer-image"
-                  loading="lazy"
-                />
-              )}
-            </div>
-            
-            <div 
-              className={`beer-description ${selectedBeer === beer.id_beer ? 'expanded' : ''}`}
-              aria-labelledby={`beer-name-${beer.id_beer}`}
-            >
-              {beer.description && <p>{beer.description}</p>}
-              {beer.ibu && (
-                <p className="beer-ibu" aria-label={`Indice d'amertume: ${beer.ibu} IBU`}>
-                  IBU: {beer.ibu}
-                </p>
-              )}
+              </h3>
               {onFavoriteClick && isFavorite && (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     onFavoriteClick(beer, e);
                   }}
-                  className="favorite-button"
-                  aria-label={`${isFavorite(beer.id_beer) ? 'Retirer des favoris' : 'Ajouter aux favoris'} ${beer.name}`}
-                  aria-pressed={isFavorite(beer.id_beer)}
+                  className="favorite-button ml-2 p-1 rounded-full hover:bg-gray-100"
+                  aria-label={`${isFavorite(beer.id_beer) ? 'Retirer des favoris' : 'Ajouter aux favoris'}`}
                 >
                   {isFavorite(beer.id_beer) ? (
-                    <FaHeart className="text-red-500" aria-hidden="true" />
+                    <FaHeart className="text-red-500 text-xl" />
                   ) : (
-                    <FaRegHeart aria-hidden="true" />
+                    <FaRegHeart className="text-gray-400 hover:text-red-500 text-xl" />
                   )}
                 </button>
               )}
+            </div>
+            
+            <div className="beer-details space-y-2">
+              <p className="text-sm sm:text-base text-gray-600 line-clamp-3">
+                {beer.description}
+              </p>
+              <div className="beer-meta flex flex-wrap gap-2 text-sm text-gray-500">
+                {beer.alcohol && (
+                  <span className="bg-amber-100 px-2 py-1 rounded-full">
+                    {beer.alcohol}% ABV
+                  </span>
+                )}
+                {beer.type && (
+                  <span className="bg-amber-100 px-2 py-1 rounded-full">
+                    {beer.type}
+                  </span>
+                )}
+              </div>
             </div>
           </article>
         ))}
