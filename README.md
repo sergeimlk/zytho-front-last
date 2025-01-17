@@ -162,6 +162,7 @@ docker ps
 
 ### Scripts Disponibles
 
+- `npm run start` - Démarre l'application en mode production 🚀
 - `npm run dev` - Lance le serveur de développement 🔧
 - `npm run build` - Crée la version de production 🏗️
 - `npm run preview` - Prévisualise la version de production 👀
