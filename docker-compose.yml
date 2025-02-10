@@ -41,9 +41,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "4001:4000"
+      - "4001:4001"
     volumes:
       - ./src:/app/src
+      - ./vite.config.ts:/app/vite.config.ts
     environment:
       - NODE_ENV=development
       - VITE_API_URL=http://localhost:3001/api/v1

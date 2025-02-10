@@ -281,3 +281,7 @@ Ce projet est Un brief effectué pour la formation, CDA chez Simplon
 <img src="https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif" width="150" />
 <img src="https://media.giphy.com/media/KB8C86UMgLDThpt4WT/giphy.gif" width="150" />
 <img src="https://media.giphy.com/media/3o7TKMt1VVNkHV2PaE/giphy.gif" width="150" />
+
+
+
+docker-compose down && docker-compose up --build

@@ -1,12 +1,5 @@
-:root {
-  --primary-dark: #D23B3B;
-  --background-dark: #1A1A1A;
-}
-
 .home {
-  min-height: 100vh;
   padding: 2rem 0;
-  background-color: var(--background-dark);
 }
 
 .hero-slider {
@@ -44,6 +37,7 @@
 .hero-slide.active {
   opacity: 1;
   visibility: visible;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
 }
 
 .hero-content {
