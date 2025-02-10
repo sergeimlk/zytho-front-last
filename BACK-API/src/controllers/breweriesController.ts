@@ -1,4 +1,3 @@
-
 import { Request, Response } from "express";
 import { breweriesModel } from "../models/breweriesModel";
 import {
@@ -37,8 +36,8 @@ export const breweriesController = {
   ) => {
     // Logic to create a new brewery
     try {
-      const { name, country } = req.body;
-      const newbrewery = await breweriesModel.post(name, country);
+      const { name, country, region } = req.body;
+      const newbrewery = await breweriesModel.post(name, country, region);
       res.status(201).json(newbrewery);
     } catch (error) {
       res.status(500).json({ message: (error as Error).message });
@@ -50,11 +49,12 @@ export const breweriesController = {
   ) => {
     // Logic to update a brewery by ID
     try {
-      const { name, country } = req.body;
+      const { name, country, region } = req.body;
       const updatedbrewery = await breweriesModel.put(
         parseInt(req.params.id),
         name,
-        country
+        country,
+        region
       );
       res.status(200).json(updatedbrewery);
     } catch (error) {

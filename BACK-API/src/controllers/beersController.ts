@@ -36,13 +36,13 @@ export const beersController = {
   ) => {
     // Logic to create a new beer
     try {
-      const { name, description, abv, price, id_brewery } = req.body;
+      const { name, type, abv, description, brewery_id } = req.body;
       const newBeer = await beersModel.post(
         name,
-        description,
+        type,
         abv,
-        price,
-        id_brewery
+        description,
+        brewery_id
       );
       res.status(201).json(newBeer);
     } catch (error) {
@@ -55,14 +55,14 @@ export const beersController = {
   ) => {
     // Logic to update a beer by ID
     try {
-      const { name, description, abv, price, id_brewery } = req.body;
+      const { name, type, abv, description, brewery_id } = req.body;
       const updatedBeer = await beersModel.put(
         parseInt(req.params.id),
         name,
-        description,
+        type,
         abv,
-        price,
-        id_brewery
+        description,
+        brewery_id
       );
       res.status(200).json(updatedBeer);
     } catch (error) {

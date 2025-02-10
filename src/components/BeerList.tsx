@@ -91,14 +91,15 @@ export const BeerList: React.FC<BeerListProps> = ({
     >
       <div 
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 p-2 sm:p-4 mx-auto max-w-7xl"
-        role="list"
+        role="listbox"
       >
         {apiBeers.map((beer) => (
           <article 
             key={beer.id_beer} 
+            role="option"
+            aria-selected={selectedBeer === beer.id_beer}
             className={`beer-card flex flex-col p-3 sm:p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow
               ${selectedBeer === beer.id_beer ? 'selected border-2 border-amber-500' : ''}`}
-            role="listitem"
             tabIndex={0}
             onClick={() => {
               if (onBeerClick) {
@@ -107,7 +108,6 @@ export const BeerList: React.FC<BeerListProps> = ({
               setSelectedBeer(selectedBeer === beer.id_beer ? null : beer.id_beer);
             }}
             onKeyDown={(e) => handleKeyPress(e, beer)}
-            aria-selected={selectedBeer === beer.id_beer}
           >
             <div className="flex justify-between items-start mb-2">
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900 flex-grow">

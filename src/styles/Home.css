@@ -1,5 +1,12 @@
+:root {
+  --primary-dark: #D23B3B;
+  --background-dark: #1A1A1A;
+}
+
 .home {
+  min-height: 100vh;
   padding: 2rem 0;
+  background-color: var(--background-dark);
 }
 
 .hero-slider {

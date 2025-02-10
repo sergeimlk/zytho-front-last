@@ -1,4 +1,3 @@
-
 import { pool } from "../config/db";
 import { BreweryResponseBody } from "../interfaces/breweryInterfaces";
 
@@ -16,21 +15,33 @@ export const breweriesModel = {
     return rows[0];
   },
   // Logic to create a new brewery
-  post: async (name: string, country: string): Promise<BreweryResponseBody> => {
-    const query =
-      "INSERT INTO breweries (name, country) VALUES ($1, $2) RETURNING *";
-    const { rows } = await pool.query(query, [name, country]);
+  post: async (
+    name: string,
+    country: string,
+    region: string
+  ): Promise<BreweryResponseBody> => {
+    const query = `
+      INSERT INTO breweries (name, country, region)
+      VALUES ($1, $2, $3)
+      RETURNING *
+    `;
+    const { rows } = await pool.query(query, [name, country, region]);
     return rows[0];
   },
   // Logic to update a brewery by ID
   put: async (
     id: number,
     name: string,
-    country: string
+    country: string,
+    region: string
   ): Promise<BreweryResponseBody> => {
-    const query =
-      "UPDATE breweries SET name = $1, country = $2 WHERE id_brewery = $3 RETURNING *";
-    const { rows } = await pool.query(query, [name, country, id]);
+    const query = `
+      UPDATE breweries
+      SET name = $1, country = $2, region = $3
+      WHERE id_brewery = $4
+      RETURNING *
+    `;
+    const { rows } = await pool.query(query, [name, country, region, id]);
     return rows[0];
   },
   // Logic to delete a brewery by ID

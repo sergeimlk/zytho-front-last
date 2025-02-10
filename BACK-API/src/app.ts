@@ -4,10 +4,19 @@ import { router as breweriesRoutes } from './routes/breweriesRouter';
 import swaggerUi from "swagger-ui-express";
 import { swaggerDocs } from "./docs/swagger";
 import cors from 'cors';
+import { pool } from './config/db';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app: Application = express();
 const version = 'v1';
 const path = `/api/${version}`;
+
+// Test de connexion à PostgreSQL
+pool.connect()
+  .then(() => console.log('Connecté à PostgreSQL'))
+  .catch((err) => console.error('Erreur de connexion à PostgreSQL:', err));
 
 app.use(cors());
 app.use(express.json());

@@ -79,7 +79,7 @@ const Home: React.FC = () => {
   }, [nextSlide, isTransitioning]);
 
   return (
-    <div className="home-page">
+    <div className="home">
       <div className="hero">
         <div className="hero-content">
           <h1>Découvrez les Meilleures Bières Artisanales</h1>
@@ -106,10 +106,13 @@ const Home: React.FC = () => {
             <div 
               key={slide.id} 
               className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
+              style={{
+                background: 'linear-gradient(90deg, var(--background-dark) 0%, var(--primary-dark) 100%)'
+              }}
             >
               <div className="hero-content">
                 <div className="hero-text">
-                  {slide.label && <div className="new-label">{slide.label}</div>}
+                  <span className="new-label">{slide.label}</span>
                   <h1>{slide.title}</h1>
                   <h2>{slide.subtitle}</h2>
                   <p>{slide.description}</p>

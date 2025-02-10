@@ -1,18 +1,13 @@
 export interface BeerRequestBody {
   name: string;
-  description: string;
+  type: string;
   abv: number;
-  price: number;
-  id_brewery: number;
+  description: string;
+  brewery_id: number;
 }
 
-export interface BeerResponseBody {
+export interface BeerResponseBody extends BeerRequestBody {
   id_beer: number;
-  name: string;
-  description: string;
-  abv: number;
-  price: number;
-  id_brewery: number;
   created_at: Date;
   updated_at: Date;
 }

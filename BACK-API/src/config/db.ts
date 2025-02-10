@@ -3,22 +3,29 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: parseInt(process.env.DB_PORT || '5432', 10),
+const config = {
+  user: process.env.POSTGRES_USER || 'admin',
+  password: process.env.POSTGRES_PASSWORD || 'password123',
+  host: process.env.POSTGRES_HOST || 'postgres',
+  port: parseInt(process.env.POSTGRES_PORT || '5432'),
+  database: process.env.POSTGRES_DB || 'zytho'
+};
+
+console.log('Database configuration:', {
+  ...config,
+  password: '****' // Masquer le mot de passe dans les logs
 });
+
+export const pool = new Pool(config);
 
 export const testDBConnection = async () => {
   try {
     const client = await pool.connect();
-    console.log('Connected to the database');
+    console.log('Connected to the database successfully');
     client.release();
     return true;
   } catch (err) {
-    console.error('Error connecting to the database', err);
+    console.error('Error connecting to the database:', err);
     return false;
   }
 };
