@@ -12,8 +12,8 @@ export const beersController = {
     res: Response<BeerResponseBody[] | { message: string }>
   ) => {
     try {
-      const beers = await beersModel.get();
-      res.status(200).json(beers);
+      // const beers = await beersModel.get();
+      res.status(200).json("coucou");
     } catch (error) {
       res.status(500).json({ message: (error as Error).message });
     }

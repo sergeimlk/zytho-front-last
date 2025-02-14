@@ -1,33 +1,33 @@
-version: '3.8'
-
 services:
-  frontend:
-    build:
-      context: ./zythologue-front-jn
-    ports:
-      - "5173:5173"
-    depends_on:
-      - backend
+  # frontend:
+  #   build:
+  #     context: ./zythologue-front-jn
+  #   ports:
+  #     - "5173:5173"
+  #   depends_on:
+  #     - backend
 
   backend:
     build:
-      context: ./BACK-API
+      context: .
     ports:
       - "3000:3000"
     environment:
-      - DB_USER=your_db_user
-      - DB_PASSWORD=your_db_password
-      - DB_HOST=database
-      - DB_DATABASE=your_db_name
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=zytho
     depends_on:
       - database
 
   database:
     image: postgres:latest
+    container_name: postgres
     environment:
-      POSTGRES_USER: your_db_user
-      POSTGRES_PASSWORD: your_db_password
-      POSTGRES_DB: your_db_name
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=zytho
     volumes:
       - db_data:/var/lib/postgresql/data
 
