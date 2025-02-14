@@ -13,17 +13,17 @@ interface BeerListProps {
   isFavorite?: (beerId: number) => boolean;
 }
 
-interface Beer {
-  id: string;
-  name: string;
-  description?: string;
-  // Ajoutez d'autres propriétés selon votre modèle de données
-}
+// interface Beer {
+//   id: string;
+//   name: string;
+//   description?: string;
+//   // Ajoutez d'autres propriétés selon votre modèle de données
+// }
 
 export const BeerList: React.FC<BeerListProps> = ({ 
-  beers = [],
-  loading = false,
-  error = null,
+  // beers = [],
+  // loading = false,
+  // error = null,
   onBeerClick,
   onFavoriteClick,
   isFavorite
