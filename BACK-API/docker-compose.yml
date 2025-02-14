@@ -30,6 +30,7 @@ services:
       - POSTGRES_DB=zytho
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./db-scripts:/docker-entrypoint-initdb.d/
 
 volumes:
   db_data:
