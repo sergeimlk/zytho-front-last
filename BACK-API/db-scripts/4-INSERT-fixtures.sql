@@ -16,9 +16,9 @@ INSERT INTO Breweries (name, country, region, address, facebook_link) VALUES
 -- Insert data into Ingredients table
 INSERT INTO Ingredients (name, type) VALUES
 ('Malt', 'Grain'),
-('Houblon', 'Houblon'),  -- Corrected typo here.  It was "Hops" in English.
-('Levure', 'Levure'), -- Corrected to French
-('Eau', 'Eau');      -- Corrected to French
+('Houblon', 'Houblon'),
+('Levure', 'Levure'),
+('Eau', 'Eau');
 
 -- Insert data into Categories table
 INSERT INTO Categories (name) VALUES
@@ -29,11 +29,10 @@ INSERT INTO Categories (name) VALUES
 
 -- Insert data into Beers table
 INSERT INTO Beers (name, description, abv, type, color, release_date, id_brewery) VALUES
-('Bobs Lager', 'Une lager légère et rafraîchissante', 4.5, 'Lager', 'Dorée', '2023-01-01', 1),  -- Couleur in French
-('Belharra Ale', 'Une ale douce et fruitée', 5.2, 'Ale', 'Ambrée', '2023-02-01', 2),   -- Couleur in French
-('Docks Stout', 'Un stout fort et robuste', 6.8, 'Stout', 'Noire', '2023-03-01', 3),    -- Couleur in French
-('IPA Basque', 'Une IPA houblonnée et savoureuse', 6.0, 'IPA', 'Dorée', '2023-04-01', 1); -- Couleur in French
-
+('Bobs Lager', 'Une lager légère et rafraîchissante', 4.5, 'Lager', 'Dorée', '2023-01-01', 1),
+('Belharra Ale', 'Une ale douce et fruitée', 5.2, 'Ale', 'Ambrée', '2023-02-01', 2),
+('Docks Stout', 'Un stout fort et robuste', 6.8, 'Stout', 'Noire', '2023-03-01', 3),
+('IPA Basque', 'Une IPA houblonnée et savoureuse', 6.0, 'IPA', 'Dorée', '2023-04-01', 1);
 
 -- Insert data into BeerIngredients table
 INSERT INTO BeerIngredients (id_beer, id_ingredient) VALUES
@@ -63,18 +62,3 @@ INSERT INTO Photos (id_beer, url) VALUES
 (2, 'https://brasseriebelharra.com/images/belharra_ale.jpg'),
 (3, 'https://brasseriedesdocks.com/images/docks_stout.jpg'),
 (4, 'https://etxekobobsbeer.com/images/ipa_basque.jpg');
-content_copy
-Use code with caution.
-SQL
-
-Key Changes and Explanations:
-
-03-CREATE-triggers.sql: Now includes all the necessary triggers for each table to update the updated_at column. The update_updated_at_column() function is shown here for completeness but it would normally reside in your 02-CREATE-functions.sql file.
-
-04-INSERT-fixtures.sql:
-
-French Corrections: Minor corrections made to the French translations for ingredient types and beer colors for consistency. (e.g., "Hops" -> "Houblon", "Golden" -> "Dorée", etc.)
-
-Formatting: Improved readability with minor formatting adjustments to the INSERT statements.
-
-These complete files provide a solid foundation for your database setup. Remember to execute the SQL files in the correct order (01, then 02, then 03, then 04). This will ensure tables are created, functions are defined, triggers are set up, and then the sample data is inserted.

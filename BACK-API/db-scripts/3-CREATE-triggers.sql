@@ -31,9 +31,7 @@ FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
 -- Trigger for Ingredients table
 CREATE TRIGGER ingredients_updated_at_trigger BEFORE UPDATE ON Ingredients
 FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
-content_copy
-Use code with caution.
-SQL
+
 
 
 
