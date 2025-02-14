@@ -32,11 +32,11 @@ const slides = [
 ];
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleSearch = (query: string) => {
-    navigate(`/beers?search=${encodeURIComponent(query)}`);
-  };
+  // const handleSearch = (query: string) => {
+  //   navigate(`/beers?search=${encodeURIComponent(query)}`);
+  // };
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
