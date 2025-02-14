@@ -1,0 +1,61 @@
+# version: '3.8'
+
+# services:
+#   postgres:
+#     image: postgres:latest
+#     container_name: postgres-zytho
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     environment:
+#       - POSTGRES_USER=admin
+#       - POSTGRES_PASSWORD=password123
+#       - POSTGRES_DB=zytho
+#     networks:
+#       - zytho-network
+
+#   backend:
+#     build:
+#       context: ./BACK-API
+#       dockerfile: Dockerfile
+#     container_name: zytho-backend
+#     ports:
+#       - "3001:3000"
+#     environment:
+#       - POSTGRES_USER=admin
+#       - POSTGRES_PASSWORD=password123
+#       - POSTGRES_DB=zytho
+#       - POSTGRES_HOST=postgres
+#       - POSTGRES_PORT=5432
+#       - PORT=3000
+#       - JWT_SECRET=votre_secret_jwt_super_securise
+#       - NODE_ENV=development
+#     depends_on:
+#       - postgres
+#     networks:
+#       - zytho-network
+
+#   frontend:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - "4001:4001"
+#     volumes:
+#       - ./src:/app/src
+#       - ./vite.config.ts:/app/vite.config.ts
+#     environment:
+#       - NODE_ENV=development
+#       - VITE_API_URL=http://localhost:3001/api/v1
+#     networks:
+#       - zytho-network
+#     depends_on:
+#       - backend
+
+# volumes:
+#   postgres_data:
+
+# networks:
+#   zytho-network:
+#     driver: bridge 
